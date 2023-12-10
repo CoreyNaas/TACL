@@ -1,4 +1,6 @@
-# Thing-Action-Context Language, TACL- A General Purpose Language
+# Thing-Action-Context Language, TACL
+
+A Domain-Specific, General Purpose Language to Think and Write In
 
 Specification Version: v1.0.1 (2023-11-13T19:00:00-07:00)
 
