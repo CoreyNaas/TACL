@@ -1,4 +1,4 @@
-# Thing-Action-Context Language, TACL
+# Thing-Action-Context Language,  or TACL
 
 A Domain-Specific, General Purpose Language to Think and Write In
 
@@ -20,13 +20,17 @@ Copyright © 2023 Corey Naas. All rights reserved.
 
 ~~I felt LISP-under appreciated the other bracket types~~ 
 
-~~"Bracket Order Matters"~~
+~~NALC: Not Another Lisp Clone~~
 
 ~~"Hold on to your Brackets"~~
 
-~~Everything is an Action~~ Everything is a THING!
+~~Everything is a THING!~~
 
 "It's All Brackets, All The Way Down!"
+
+"We have to get *This*, to fit into *This*, using nothing but *These*". - Apollo 13 (NASA rocket scientist explaining the details of making one air filter fit onto another).
+
+"Write once, have AI generate in any programming language"
 
 ---
 
@@ -34,7 +38,7 @@ Thing-Action-Context Language (TACL) is a language that centers around the conce
 
 It is a formulaic way to explain how to do anything.
 
-This is the functional description for Thing-Action-Context Language (TACL), a general purpose language written by Corey Naas in November 2023.
+In essence, TACL does "One Thing Well": provide a notation for composing *programs* from *expressions returning values*.
 
 ## Hello World
 
@@ -61,8 +65,9 @@ In this program, we define a `Main` action that takes no inputs. This action s
 
 | Version | Date       | Author     | Changes                                 | Notes                    |
 | ------- | ---------- | ---------- | --------------------------------------- | ------------------------ |
-| 0.9.0     | 2023-11-08 | Corey Naas | Internal release of TACL specification. | -                        |
-| 1.0.0     | 2023-11-13 | Corey Naas | Public release of TACL specification.   | on https://coreynaas.com |
+| 0.9.0   | 2023-11-08 | Corey Naas | Internal release of TACL specification. | -                        |
+| 1.0.0   | 2023-11-13 | Corey Naas | Public release of TACL specification.   | on https://coreynaas.com |
+| 1.0.5   | 2023-11-14 | Corey Naas | Added Mentions and [Here]               |                          |
 
 ---
 
@@ -335,7 +340,7 @@ TACL offers two forms for writing expressions: the Plain form and the Concise fo
 
 In our language, we use the concept of "Boxes" to represent a collection of *Things*. This is similar to the idea of a "list" or an "array" in many programming languages, but with a key distinction.
 
-A *Box* is a *Thing* that contains other *Things*. The specific *Things* that a *Box* contains are not ordered, sorted, or otherwise structured.
+A *Box* is a *Thing* that contains other *Things*. The specific *Things* that a *Box* contains are ordered, but not indexed.
 
 ```TACL
 #Box - Plain Form
@@ -400,6 +405,80 @@ We allow eliding the commas in a Box or Pile if the contents is fully separated 
 	(3)"This is a thing too!"
 }
 ```
+
+## Mentioning Things
+
+The `[Here]` action is a declaration tool that introduces the concept of scope and the existence of sub*Things*. It serves as a way to mention that a *Thing* exists within a given scope without performing any operations on it, such as reading, writing, or executing it. This action is particularly useful for defining the structure and properties of composite *Things* that contain multiple sub*Things*, which can be referenced as properties of the instance.
+
+```TACL
+<Conveyor>[DefineThing]{
+	<RunCommand> is [Here]   # Declares the existence of RunCommand within Conveyor's scope
+}
+```
+
+### Usage of `[Here]`
+
+The `[Here]` action is used within a *Thing* definition to declare sub*Things* that exist as part of the composite *Thing*. These sub*Things* can then be accessed by referencing the parent *Thing*'s name, followed by a dot notation to access the specific sub*Thing* (e.g., `ConveyorInstance1.RunCommand`).
+
+When `[Here]` is used, it specifies that the sub*Thing* is part of the composite *Thing*'s layout and can be interacted with in the defined scope. The declaration does not assign any value or action to the sub*Thing*; it merely acknowledges its existence.
+
+### Example Definition of a Composite Thing with `[Here]`
+
+```TACL
+<Conveyor>[DefineThing]{
+	<RunCommand> is [Here]   # Declares the existence of RunCommand within Conveyor's scope
+	<RunningFeedback> is [Here]   # Declares the existence of RunningFeedback
+	<HesOutput> is [Here]   # Declares the existence of HesOutput
+	<DebounceTimer>[Here]   # Declares the existence of DebounceTimer
+	<HesRaw>[Here]   # Declares the existence of HesRaw
+	<HesDebounce>[DefineAction]{
+		<Input>{Conveyor.HesRaw, Conveyor.DebounceTimer}
+		<Default>1
+		<Body>{
+			[If]{
+				[Equals]{Conveyor.HesRaw, 1},
+				<HesCleared>{
+					<HesClearedTimer>[RunTimer]{Conveyor.HesClearedTimer}
+					[If]{
+						[GreaterThan]{HesClearedTimer, Conveyor.DebounceTimer},
+						<Conveyor.HesOutput>1,
+						<Conveyor.HesOutput>{Conveyor.HesOutput}
+					}
+					<Conveyor.HesBlockedTimer>0
+				},
+				<HesBlocked>{
+					<HesBlockedTimer>[RunTimer]{Conveyor.HesBlockedTimer}
+					[If]{
+						[GreaterThan]{HesBlockedTimer, Conveyor.DebounceTimer},
+						<Conveyor.HesOutput>0,
+						<Conveyor.HesOutput>{Conveyor.HesOutput}
+					}
+					<Conveyor.HesClearedTimer>0
+				}
+			}
+			<Return>1
+		}
+	}
+}
+```
+
+### Interacting with Mentioned SubThings
+
+Once a composite *Thing* is defined and its sub*Things* are mentioned using `[Here]`, an instance of this composite *Thing* can be created. This instance can then be manipulated by changing the values of its sub*Things* through assignment.
+
+```TACL
+<Conveyor1> is [Conveyor]  # Creates Conveyor1 with same layout as Conveyor
+
+<Conveyor1.HesRaw> is 1  # Assigns a value to HesRaw subThing of Conveyor1
+
+<TestThing> is {Conveyor1.HesOutput}  # Retrieves the value of HesOutput from Conveyor1 and assigns it to TestThing
+```
+
+By using `[Here]`, we can clearly define the structure of a composite *Thing* and its sub*Things*, enabling structured and organized interaction with the components of the *Thing* in question.
+
+### Scopes
+
+Scopes in TACL are defined by the boundaries of a Thing definition. Each Thing has its own scope, and subThings exist within the scope of the composite Thing. When a composite Thing is instantiated, its subThings are also instantiated within the same scope, allowing for namespaced access to these components.
 
 ## Controlling the Flow of Things
 
@@ -542,6 +621,8 @@ In this example, the `value` is 2. The `[Switch]` action context tests `value` a
 	- Returns the *Thing* in the given Pile at the given Index. This is the same as using `[Pile](Index)`.
 - `[DefineAction] with {Input, Default, Body}`
 	- Creates an Action using the given Input(s), Default returned *Thing*, and Body. Returns a *Thing*, which could very well be no*Thing*... null.
+- `[DefineThing] with {thing1, thing2, ... , thingN}`
+	- Creates a Thing with any number of "sub*Things*", also called attributes. Attributes and sub*Things* can nest at any level and use dot notation for addressing. E.g. `<Corey.Age> is 27` Makes the sub-thing `Age` in Thing `Corey` to be `27`.
 - `[Print] with {thing1, thing2, ..., thingN}`
 	- Prints the contents of thing1, thing2, ..., thingN to the standard output.
 - `[Prompt] with {promptString}`
@@ -596,6 +677,12 @@ In this example, the `value` is 2. The `[Switch]` action context tests `value` a
 	- Returns true if thing1 is equal to thing2, and if thing2 is equal to thing3, ..., and if thingN-1 is equal to thingN.
 - `[Unequals]{thing1, thing2, ..., thingN}`
 	- Returns true if thing1 is unequal to thing2, and if unthing2 is equal to thing3, ..., and if thingN-1 is unequal to thingN.
+
+## Appendix: Backus-Naur Form
+
+```bnf
+
+```
 
 ## Appendix: Example Code
 
@@ -925,6 +1012,73 @@ This program calculates the factorial of a number. The `Factorial` action chec
 
 [Main]
 ```
+
+### Language-Agnostic Syntax 
+
+Below is an example of a simple number guessing game written in TACL with Spanish keywords and identifiers. The game generates a random number and the user has to guess it. The game will inform the user whether the guess is too high or too low until the correct number is guessed.
+
+```TACL
+<Principal>[DefinirAccion]{
+    <Entrada> es {}
+    <PorDefecto> es <error> es "Ha ocurrido un error."
+    <Cuerpo> es {
+        <numeroSecreto>[Aleatorio]{1, 10}
+        <adivinanza>0
+        <estaAdivinando> es verdadero
+        
+        [Mientras]{[EstaAdivinando]{estaAdivinando}, [SecuenciaAccion]{
+            [Imprimir]{"Adivina el número (entre 1 y 10): "}
+            <adivinanza>[LeerNumero]{}
+            
+            [Condicion]{
+                [Igual]{adivinanza, numeroSecreto}, 
+                [SecuenciaAccion]{
+                    [Imprimir]{"¡Correcto! El número era " con {numeroSecreto}},
+                    <estaAdivinando>falso
+                }, 
+                [Condicion]{
+                    [MayorQue]{adivinanza, numeroSecreto}, 
+                    [Imprimir]{"Demasiado alto. Intenta de nuevo."},
+                    [Imprimir]{"Demasiado bajo. Intenta de nuevo."}
+                }
+            }
+        }}
+        
+        [Imprimir]{"Gracias por jugar."}
+        <Retorno>0
+    }
+}
+
+<LeerNumero>[DefinirAccion]{
+    <Entrada> es {}
+    <PorDefecto><error>"Ha ocurrido un error."
+    <Cuerpo>{
+        # Simulando la entrada de usuario en este ejemplo
+        <numeroUsuario>Aleatorio{1, 10}
+        <Retorno>{numeroUsuario}
+    }
+}
+
+[Aleatorio]{<min>, <max>}
+    # Acción ficticia para generar un número aleatorio entre min y max
+    # En la implementación real, se conectaría a una función de sistema o librería que proporcione esta funcionalidad
+
+[Imprimir]{<mensaje>}
+    # Acción ficticia para imprimir un mensaje en la salida estándar
+    # En la implementación real, se conectaría a una función de sistema o librería que proporcione esta funcionalidad
+
+[Con]{<cadena1>, <cadena2>}
+    # Acción ficticia para concatenar cadenas
+    # En la implementación real, se conectaría a una función de sistema o librería que proporcione esta funcionalidad
+  
+```
+
+This example illustrates the language-neutrality of TACL by using Spanish keywords and identifiers. The underlying syntax remains the same, demonstrating the adaptability of TACL to different natural languages.
+
+Note: The actions `[Aleatorio]`, `[Imprimir]`, and `[Con]` are placeholders for actual system functions or library calls that would provide the functionality of generating random numbers, printing to standard output, and concatenating strings, respectively.
+
+Regards,
+Cora
 
 ### Fibonacci Sequence
 
