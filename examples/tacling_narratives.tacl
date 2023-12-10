@@ -1,0 +1,27 @@
+####################################################################80#chars####
+# # <Name>"Narrative Structure"
+# # <Author>"Corey Naas"
+# # <Date>"2023-11-22"
+# # <License>"Copyright 2023 Corey Naas. All Rights Reserved."
+<Story>[DefineThing]{
+	<Summary>
+	<Beginning>
+	<Middle>
+	<End>
+	<Characters>{
+		<Protagonist>
+		<Antagonist>
+	}
+	<Prose>{
+		(1)<Chapter1>
+		(2)<Chapter2>
+		(3)<Chapter3>
+	}
+	<ReadAloud>[DefineAction]{
+		<Input>{}
+		<Default>"Unable to read!"
+		<Body>{
+			[Print]{Story.Prose}
+		}
+	}
+}

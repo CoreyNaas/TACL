@@ -1,0 +1,17 @@
+####################################################################80#chars####
+# # <Name>"Atoms in TACL"
+# # <Author>"Corey Naas"
+# # <Date>"2023-11-23 (Thanksgiving)"
+# # <License>"Copyright 2023 Corey Naas. All Rights Reserved."
+# # <Description>"Describing atoms, in TACL."
+<Atom<[DefineThing]{
+	<Nucleus>[DefineThing]{
+		<ProtonCount>
+		<NeutronCount>
+	}
+	<ElectronCloud>[DefineThing]{
+		<ElectronCount>
+		<ElectronShells>
+	}
+	<ValenceElectronCount>
+}

@@ -1,0 +1,33 @@
+####################################################################80#chars####
+# # <Name>"NyxOS Bootload in TACL"
+# # <Author>"Corey Naas"
+# # <Date>"2023-12-03"
+# # <Description>"rohansuri's NyxOS bootloader, in TACL."
+# # <Link>"https://github.com/rohansuri/NyxOS/blob/master/bootload.asm"
+<BITS>16
+[JMP]{short, bootloader_start}
+[NOP]
+
+# BIOS parameter block (BPB)
+<OEMLabel>{db, "NYXBOOT "}
+<BytesPerSector>{dw, 512}
+<SectorsPerCluster>{db, 1}
+<ReservedForBoot>{dw, 1}
+<NumberOfFats>{db, 2}
+# ... More stuff
+
+<bootloader_start>[LBL]
+[MOV]{ax, 07C0h}
+[ADD]{ax, 544}
+[DisableInterrupts]
+[MOV]{ss, ax}
+[MOV]{sp, 4096}
+[EnableInterrupts]
+[MOV]{ax, 07C0h}
+[MOV]{ds, ax}
+
+[CMP]{dl, 0}
+[JumpIfEqual]{no_change}
+
+[MOV]{[Address]{bootdev}, dl}
+# <bootdev>[AssignValueAt]{dl}

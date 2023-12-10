@@ -1,0 +1,58 @@
+####################################################################80#chars####
+# # <Name>"Miscellaneous Examples"
+# # <Author>"Corey Naas"
+# # <Date>"2023-10"
+# # <License>"Copyright 2023 Corey Naas. All Rights Reserved."
+
+<System/Language>{"EN"}
+<System/StyleEnforcement>{"None"}
+
+<PersonType>[DefineThingType]{
+	<Name>
+	<Age>
+}
+
+<CarType>[DefineThingType]{
+	<Name>
+	<YearMakeModel>
+	<Registered>
+	<Insured>
+}
+
+<ValidateDrivability>[DefineAction]{
+	<Inputs>{iDriver, iCar}
+	<Default>0
+	<Body>{
+		<isDriverValid>[GRT]{iDriver.Age, 18}
+		<isCarValid>[And]{iCar.Registed, iCar.Insured}
+		<isCarOperable>[Attempt]{
+			[iCar.Start]
+			<onFail>{
+				[Print]"Unable to Start Car"
+				<Return>0
+			}
+		}
+		<Return>[And]{
+			isDriverValid
+			isCarValid
+			isCarOperable
+		}
+	}
+}
+
+<Corey>[CopyThingType]{PersonType}
+<Corey.Name>"Corey Naas"
+<Corey.Age>27
+
+<CoreysCar>[CopyThingType]{CarType}
+<CoreysCar.Name>"Jolene"
+<CoreysCar.YearMakeModel>"2016 Toyota 4Runner"
+<CoreysCar.Registered>1
+<CoreysCar.Insured>1
+
+<ValidationResult>[ValidateDrivability]{Corey, CoreysCar}
+[If]{
+	ValidationResult
+	[Print]"Corey Can Drive!"
+	[Print]"Corey Can't Drive!"
+}

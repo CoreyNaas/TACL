@@ -1,0 +1,78 @@
+####################################################################80#chars####
+# # <Name>"C Pointers in TACL"
+# # <Author>"Corey Naas"
+# # <Date>"2023-11-22"
+# # <License>"Copyright 2023 Corey Naas. All Rights Reserved."
+# # <Description>"I had ChatGPT generate a basic "pointer example" program in C. This is my attempt to transcode that into TACL form."
+[Include]{stdio.h}
+<Main>[DefineAction]{
+    <Input>{}
+    <Default>"Error!
+    <Body>{
+        # We need a few more Actions specifically for pointers.
+        # <result>[AddressOf]{arg} Returns the address of Thing "arg".
+        # <result>[ValueAt]{arg} Returns the value at Thing "arg", presuming Thing "arg" is a pointer
+        # <result>[AssignPointerTo]{arg} Assigns pointership to Thing "result", using address of Thing "arg"
+        #   I wonder if [AssignAddressOf] would be better, total consistency with other Actions.
+        # <result>[AssignValueAt]{arg} Assigns the value at the address of Thing "arg" to Thing "result"
+        # <result>[AssignType]{arg} (C requires type assignment.)
+
+        # Declare an integer variable 'myVar' and initialize it
+        <myVar>[AssignType]{"integer"}
+        <myVar>42
+        # Declare a pointer to int and assign it the address of 'myVar'
+        <PointerToMyVar>[AssignPointerTo]{myVar}
+
+        # Print the value of 'myVar',
+        [Print]{myVar}
+        # the address of 'myVar',
+        [Print]{[AddressOf]{myVar}}
+        # and the value of the pointer
+        [Print]{PointerToMyVar}
+
+        # Dereferencing 'PointerToMyVar' to access the value of 'myVar' indirectly
+        [Print]{[ValueAt]{PointerToMyVar}}
+
+        # Change the value of 'myVar' indirectly by dereferencing 'PointerToMyVar'
+        <PointerToMyVar>[AssignValueAt]{24}
+        # Print the new value of 'myVar' to demonstrate the change
+        [Print]{myVar}
+
+        # Working with pointer arithmetic
+        # Declare an array of integers
+        <myarray>[AssignType]{int}
+        <myArray>{(0) 10, (1) 20, (2) 30, (3) 40, (5) 50}
+
+        # Declare a pointer to the first element of the array
+        <PointerToMyArray>[AssignPointerTo]{myArray}
+
+        # Print the first element using pointer dereferencing
+        [Print]{[ValueAt]{PointerToMyArray}}
+        # Move the pointer to the next element using pointer arithmetic
+        # Adding 1 to a pointer moves it to the next element of the type it points to
+        <PointerToMyArray>[Increment]
+        [Print]{[ValueAt]{PointerToMyArray}}
+        # Accessing the third element by indexing into the array using the pointer
+        # This is equivalent to numbers[2], but using the pointer offset instead
+        [Print]{[ValueAt]{[PointerToMyArray](1)}}
+        
+        # Use a pointer to function to store the address of a function
+        # Declare a function prototype
+        <Square>[AssignType]{Action}
+
+        # Declare a pointer to a function
+        <PointerToMyAction>[AssignPointerTo]{Square}
+
+        # Call the function through the pointer
+        <myResult>[PointerToMyAction]{5}
+        [Print]{Result} # this will print "25"
+    }
+}
+
+<Square>[DefineAction]{
+    <Input>{input}
+    <Default>"Error!"
+    <Body>{
+        <Return>[Multiply]{input, input}
+    }
+}

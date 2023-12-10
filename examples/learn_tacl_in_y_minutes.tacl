@@ -1,0 +1,36 @@
+####################################################################80#chars####
+# # <Name>"Learn TACL in Y Minutes"
+# # <Author>"Corey Naas"
+# # <Date>"2023-11"
+# # <License>"Copyright 2023 Corey Naas. All Rights Reserved."
+
+# A comment.
+0   # Evaluates to 0.
+1   # Evaluates to 1.
+<>  # Null assignment.
+<identifier> is 1  # Assigning integer number 1 at "identifier" data and code storage space.
+<identifier>       # Assigning null at "identifier" data and code storage space.
+<Something> is 1              # Assigning integer number 1 to "Something".
+<Something>1                  # Assigning integer number 1 to "Something" in concise form.
+<Something> is "Hello World"  # Assigning string literal "Hello World" to "Something".
+<Something>{identifier}       # Assigning data and code at "identifier" to data and code at "Something";
+                              #   other Things must be enclosed in curly brackets, only literals are
+                              #   exempt.
+# THINGS ARE ALWAYS ENCLOSED IN BRACKETS! I.E. ALL "THING" TOKENS FOR LEXING ARE
+# DELIMITED AND ALREADY READ/WRITE/EXECUTE ASSIGNED.
+
+<Thing.subThing>"I'm a SubThing!"               # Dot notation is used to refer to parent Thing and child subThing.
+<>[Print] with "Hello World."                   # An action, called "Print", and a single argument, a string literal, the
+                                                #   result of which is assigned to the Null Thing after execution.
+[Print] with "Hello Again!"                     # We elide the Null Thing assignment in front of action calls for readability.
+<myString> is [Print] with "Hello World!"       # An action called "Print" and a string literal, also 
+                                                #   assigned to a Thing "myString" after execution.
+<myString> is [Print] with {"Hello", "World!"}  # The same as above, but we use curly bracket to enclose multiple arguments.
+<Thing>{myString}                               # Assigning the value(s) of myString to Thing, using curly brackets 
+                                                #   to enclose direct assignment arguments.
+
+<Result>[Add]{1, 2}                   # Add 1 and 2 and assign the result in Result
+<Result2>[Multiply]{Result, 3}        # Using a Thing as an argument in an action.
+<SomeMath>[Add]{[Multiply]{4, 5}, 2}  # Assigning the result of 2+(4*5) to SomeMath; Nesting TACs (Things-Action-Context statements) 
+
+<>[]{}

@@ -1,0 +1,36 @@
+####################################################################80#chars####
+# # <Name>"Shoe Example"
+# # <Author>"Corey Naas"
+# # <Date>"2023-10"
+# # <License>"Copyright 2023 Corey Naas. All Rights Reserved."
+
+<Shoe>[DefineThingType]{
+	<Insole>[Here]
+	<Midsole>[Here]
+	<Outsole>[Here]
+	<Laces>[Here]
+	<Tongue>[Here]
+	<PutOn>[DefineAction]{
+		<Input>{foot}
+		<Default>"Failed to put on shoe!"
+		<Body>{
+			[MoveToInside]{foot, Shoe}
+			<Return>"Put on shoe!"
+		}
+	}
+	<TakeOff>[DefineAction]{
+		<Input>{foot}
+		<Default>"Failed to take off shoe!"
+		<Body>{
+			[RemoveFromInside]{foot, Shoe}
+			<Return>"Took off shoe!"
+		}
+	}
+}
+
+# The [CopyThingType] action makes clear you're copying the "Type" of a given
+#   Thing, not the contents of it, e.g. declaring that something is "just like
+#   another Thing" (but not the exact same Thing).
+<myShoe> is [CopyThingType] with {Shoe}
+<myFoot> is "My left foot"
+[myShoe.PutOn]{myFoot}
