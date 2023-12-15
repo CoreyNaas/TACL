@@ -20,13 +20,13 @@ Thing-Action-Context Language, or TACL, is a "programming" "language" I designed
 
 It also forces me to think about and express programming in a semi-abtract way, while thinking through problems; it's more "code-like" than plain-english pseudocode, but not quite a proper "standard" language like python. The fact that it doesn't need to compile, and thus there are no true "wrong" ways to use it (the end-goal is that the *AI* understands what you want to do!), makes it so that one can use it however _they_ use _their_ language. It doesn't have to be English! I could take one's TACL that's written in a language I don't know, like Korean, and translate it to English, giving me a programming-language-agnostic yet still-precise "thought-for-thought" expression of someone else's scratch ideas.
 
-The brackets purposefully surround the whole "Thing" name, and every expression in TACL, which in turn allows any sequence of unicode characters to act as names, with delimiting to separate yet connect "contexts". This makes "variable naming" totally and completely open to creativity. Basic UpperCamelCase? That's my preference, but it's only a preference. A whole sentence, with spaces? I won't stop you! Emojis? Sure, yeah. ONLY variations of the pointing fingers? Actually... <👈🏠>[🔥]{⛽🕯}. Most-usefully, it allows for natural and intuitive writing in one's own language, however ordered (LTR, RTL, etc), however expressed natively or idiosyncratically, with only a few reserved characters for delimiting the part-of-speech of TACL. It is thus easily Thing-for-Thing translated into other languages using translators, or into actual code using AI.
+The brackets purposefully surround the whole "Thing" name, and every expression in TACL, which in turn allows any sequence of unicode characters to act as names, with delimiting to separate yet connect "contexts". This makes "variable naming" totally and completely open to creativity. Basic UpperCamelCase? That's my preference, but it's only a preference. A whole sentence, with spaces? I won't stop you! Emojis? Sure, yeah. ONLY variations of the pointing fingers? Actually... `<👈🏠>[🔥]{⛽🕯}`. Most-usefully, it allows for natural and intuitive writing in one's own language, however ordered (LTR, RTL, etc), however expressed natively or idiosyncratically, with only a few reserved characters for delimiting the part-of-speech of TACL. It is thus easily Thing-for-Thing translated into other languages using translators, or into actual code using AI.
 
 I asked GPT-4 what the "do one thing well" that this language provides is, given the specification, and this is what it said:
 
 > The "do one thing well" for Thing-Action-Context Language (TACL) can be summarized as providing a clear and expressive framework for programmatic instruction and control flow that closely aligns with natural language constructs. It excels at allowing users to define and manipulate data, actions, and contexts with an emphasis on readability and ease of understanding. TACL achieves this through a unique syntax that organizes code into "Things" (data or actions) and their associated contexts.
 
-## Hello World
+## Example: Hello World
 
 In this program, we define a `Main` action that takes no inputs. This action simply prints "Hello World!" to the standard output and then returns 0.
 
@@ -49,8 +49,6 @@ In this program, we define a `Main` action that takes no inputs. This action s
 ```
 
 ---
-
-**Corey Naas**, November 2023
 
 https://coreynaas.com/
 
