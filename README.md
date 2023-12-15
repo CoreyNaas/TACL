@@ -9,12 +9,19 @@ A Domain-Specific, General Purpose Language to Think and Write In
 [Appendices (original examples)](appendices.md)
 
 ```
-<theAcronym>[Acronomize]{"Thing-Action-Context Language"}
+<theAcronym>[Acronymize]{"Thing-Action-Context Language"}
 [Print]{theAcronym}
 
-## Run the code above in your head and then turn your head or monitor upside down to see the answer below!
-ꓶꓛⱯꓕ <
+## Run the code above in your head and see below for the answer!
 ```
+<details>
+  <summary>Evaluation</summary>
+
+TACL
+>TACL
+
+
+</details> 
 
 Thing-Action-Context Language, or TACL, is a "programming" "language" I designed to act as an "intermediate language" between my brain and a language model or AI that can produce code. I "write" code in plain English, using a simple brackets-only syntax, and give that to the AI to turn into actual code in my target language. I can then review the code, and focus on the last 90% of programming that requires a human mind. The syntax is flexible enough that I can manually "call out" target-language-specific expressions (such as an "AssignType" action that would be required in C-targeted TACL but not in Python-targeted TACL) as needed, and focus on declaring what I want to see performed in the target code, as brief as possible and as detailed as required.
 
