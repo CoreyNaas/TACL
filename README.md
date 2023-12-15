@@ -4,9 +4,8 @@ A Domain-Specific, General Purpose Language to Think and Write In
 
 ---
 
-[Specification](specification.md)
-
-[Appendices (original examples)](appendices.md)
+- [Specification](specification.md)
+- [Appendices (original examples)](appendices.md)
 
 ```
 <theAcronym>[Acronymize]{"Thing-Action-Context Language"}
@@ -17,9 +16,10 @@ A Domain-Specific, General Purpose Language to Think and Write In
 <details>
   <summary>Evaluation</summary>
 
-TACL
->TACL
-
+```
+# As output in the command line of your brain:
+# > TACL
+```
 
 </details> 
 
@@ -51,9 +51,18 @@ In this program, we define a `Main` action that takes no inputs. This action s
 # Execute the action "Main" with my name as the input
 [Main]{"Corey"}
 
+## Run the code above in your head and see below for the answer!
+```
+
+<details>
+  <summary>Evaluation</summary>
+
+```
 # As output in the command line of your brain:
 # > Hello World! My Name is Corey!
 ```
+
+</details> 
 
 ---
 
