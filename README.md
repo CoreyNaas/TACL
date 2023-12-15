@@ -44,7 +44,7 @@ I asked GPT-4 what the "do one thing well" that this language provides is, given
 
 ## Example: Hello World
 
-In this program, we define a `Main` action that takes one input. This action simply prints "Hello World! ..." to the output and returns 0.
+In this program, we define a `Main` action that takes one input. This action simply prints "Hello World! ..." to the output and returns 0. (If it returns "An Error has occurred.", the reader is encouraged to contact a physician.)
 
 ```TACL
 # Define the action "Main" with the system "DefineAction" action
@@ -68,7 +68,7 @@ In this program, we define a `Main` action that takes one input. This action s
 
 ```
 # As output in the command line of your brain:
-# > Hello World! My Name is Corey!
+> Hello World! My Name is Corey!
 ```
 
 </details> 
