@@ -41,7 +41,14 @@
         # Working with pointer arithmetic
         # Declare an array of integers
         <myarray>[AssignType]{int}
-        <myArray>{(0) 10, (1) 20, (2) 30, (3) 40, (5) 50}
+        # <myArray>{(0) 10, (1) 20, (2) 30, (3) 40, (5) 50}
+        <myArray>{
+            (0) 10
+            (1) 20
+            (2) 30
+            (3) 40
+            (5) 50
+        }
 
         # Declare a pointer to the first element of the array
         <PointerToMyArray>[AssignPointerTo]{myArray}

@@ -1,0 +1,147 @@
+####################################################################80#chars####
+# # <Name>"The Creation Story in TACL"
+# # <Author>"Corey Naas"
+# # <Date>"2023-11"
+# # <License>"Code: Copyright 2023 Corey Naas. All Rights Reserved."
+# # <License2>"Story: Copyright {beginningoftime} God. All Rights Reserved."
+
+<CreateLight>[DefineAction]{
+    <Input>{}
+    <Default><error>"Unable to create light."
+    <Body>{
+        <light>[CreateThing]{"Light"}
+        [If]{
+            (c)<>[WasCreated]{light}
+            (t)<>[Print]{"And there was light."}
+            (f)<>[Print]{error}
+        }
+        <Return>{0}
+    }
+}
+
+<CreateSky>[DefineAction]{
+    <Input>{}
+    <Default><error>"Unable to create sky."
+    <Body>{
+        <sky>[CreateThing]{"Sky"}
+        [If]{
+            (c)<>[WasCreated]{sky}
+            (t)<>[Print]{"And there was sky dividing the waters."}
+            (f)<>[Print]{error}
+        }
+        <Return>{0}
+    }
+}
+
+<CreateLandAndVegetation>[DefineAction]{
+    <Input>{}
+    <Default><error>"Unable to create land and vegetation."
+    <Body>{
+        <land>[CreateThing]{"Land"}
+        <vegetation>[CreateThing]{"Vegetation"}
+        [If]{
+            (c)<>[WasCreated]{
+                [And]{
+                    land
+                    vegetation
+                }
+            } 
+            (t)<>[Print]{"And there was land with vegetation."}, 
+            (f)<>[Print]{error}
+        }
+        <Return>{0}
+    }
+}
+
+<CreateCelestialBodies>[DefineAction]{
+    <Input>{}
+    <Default><error>"Unable to create celestial bodies."
+    <Body>{
+        <sun>[CreateThing]{"Sun"}
+        <moon>[CreateThing]{"Moon"}
+        <stars>[CreateThing]{"Stars"}
+        [If]{
+            (c)<>[WasCreated]{
+                [And]{
+                    sun
+                    moon
+                    stars
+                }
+            } 
+            (t)<>[Print]{"And there were celestial bodies to separate day from night."}, 
+            (f)<>[Print]{error}
+        }
+        <Return>{0}
+    }
+}
+
+<CreateAquaticAndAvianLife>[DefineAction]{
+    <Input>{}
+    <Default><error>"Unable to create aquatic and avian life."
+    <Body>{
+        <fish>[CreateThing]{"Fish"}
+        <birds>[CreateThing]{"Birds"}
+        [If]{
+            (c)<>[WasCreated]{
+                [And]{
+                    fish
+                    birds
+                }
+            } 
+            (t)<>[Print]{"And there were fish in the sea and birds in the sky."}, 
+            (f)<>[Print]{error}
+        }
+        <Return>{0}
+    }
+}
+
+<CreateLandAnimalsAndHumans>[DefineAction]{
+    <Input>{}
+    <Default><error>"Unable to create land animals and humans."
+    <Body>{
+        <landAnimals>[CreateThing]{"Land Animals"}
+        <humans>[CreateThing]{"Humans"}
+        [If]{
+            (c)<>[WasCreated]{
+                [And]{
+                    landAnimals
+                    humans
+                }
+            }
+            (t)<>[Print]{"And there were land animals and humans to rule over them."}
+            (f)<>[Print]{error}
+        }
+        <Return>{0}
+    }
+}
+
+<Rest>[DefineAction]{
+    <Input>{}
+    <Default><error>"Unable to rest."
+    <Body>{
+        <rest>[CreateThing]{"Rest"}
+        [If]{
+            (c)<>[WasCreated]{rest}
+            (t)<>[Print]{"And on the seventh day, God ended his work, and he rested."}
+            (f)<>[Print]{error}
+        }
+        <Return>{0}
+    }
+}
+
+<StoryOfCreation>[DefineAction]{
+    <Input>{}
+    <Default><error>"Unable to tell the story of creation."
+    <Body>{
+        [CreateLight]{}
+        [CreateSky]{}
+        [CreateLandAndVegetation]{}
+        [CreateCelestialBodies]{}
+        [CreateAquaticAndAvianLife]{}
+        [CreateLandAnimalsAndHumans]{}
+        [Rest]{}
+        <Return>{0}
+    }
+}
+
+[StoryOfCreation]
