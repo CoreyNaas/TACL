@@ -483,10 +483,6 @@ For example, if we have an action `CalculateDistance` that takes two parameters 
 
 In this case, `CalculateDistance` will be attempted. If it executes without an exception, then the program proceeds normally. But if an exception is thrown, the `HandleError` action is called.
 
-### Switch and Case
-
-To implement switch/case statements in our language, we use the action `[Switch]` followed by a Thing that we want to evaluate. We then define a Pile of `[Case]` actions, each represented as a Pile with the case value and the corresponding action. 
-
 ## Appendix: Standard Libary of Actions
 
 ### System/Shell/IO Actions
