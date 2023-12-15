@@ -1,6 +1,8 @@
-# Thing-Action-Context Language, or TACL
+# Thing-Action-Context Language (TACL)
 
 A Domain-Specific, General Purpose Language to Think and Write In
+
+"We gotta find a way to [make] \{this\} fit into the \<hole for *this*\>, using \{nothing but that\}." - [Apollo 13](https://www.youtube.com/watch?v=ry55--J4_VQ)
 
 ---
 
