@@ -3,6 +3,7 @@
 # # <Author>"Corey Naas"
 # # <Date>"2023-11-22"
 # # <License>"Copyright 2023 Corey Naas. All Rights Reserved."
+# # <TargetLanguage>"Narrative"
 <Story>[DefineThing]{
 	<Summary>
 	<Beginning>

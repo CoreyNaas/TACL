@@ -3,6 +3,7 @@
 # # <Author>"Corey Naas"
 # # <Date>"2023-12-03"
 # # <Description>"rohansuri's NyxOS bootloader, in TACL."
+# # <TargetLanguage>"x86 Assembly"
 # # <Link>"https://github.com/rohansuri/NyxOS/blob/master/bootload.asm"
 <BITS>16
 [JMP]{short, bootloader_start}

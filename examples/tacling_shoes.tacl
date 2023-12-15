@@ -3,6 +3,7 @@
 # # <Author>"Corey Naas"
 # # <Date>"2023-10"
 # # <License>"Copyright 2023 Corey Naas. All Rights Reserved."
+# # <TargetLanguage>"Reality"
 
 <Shoe>[DefineThingType]{
 	<Insole>[Here]

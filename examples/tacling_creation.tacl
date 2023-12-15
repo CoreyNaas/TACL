@@ -3,7 +3,8 @@
 # # <Author>"Corey Naas"
 # # <Date>"2023-11"
 # # <License>"Code: Copyright 2023 Corey Naas. All Rights Reserved."
-# # <License2>"Story: Copyright {beginningoftime} God. All Rights Reserved."
+# # <License2>"Story: Copyright {BeginningOfTime} God. All Rights Reserved."
+# # <TargetLanguage>"Spoken"
 
 <CreateLight>[DefineAction]{
     <Input>{}
@@ -46,7 +47,7 @@
                     vegetation
                 }
             } 
-            (t)<>[Print]{"And there was land with vegetation."}, 
+            (t)<>[Print]{"And there was land with vegetation."}
             (f)<>[Print]{error}
         }
         <Return>{0}
@@ -68,7 +69,7 @@
                     stars
                 }
             } 
-            (t)<>[Print]{"And there were celestial bodies to separate day from night."}, 
+            (t)<>[Print]{"And there were celestial bodies to separate day from night."}
             (f)<>[Print]{error}
         }
         <Return>{0}
@@ -88,7 +89,7 @@
                     birds
                 }
             } 
-            (t)<>[Print]{"And there were fish in the sea and birds in the sky."}, 
+            (t)<>[Print]{"And there were fish in the sea and birds in the sky."}
             (f)<>[Print]{error}
         }
         <Return>{0}
