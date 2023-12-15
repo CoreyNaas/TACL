@@ -26,6 +26,11 @@
 1. [Appendix: "Syntactic Sugar"](#Appendix:%20%22Syntactic%20Sugar%22)
 1. [Appendix: Paradigms](#Appendix:%20Paradigms)
 
+## Miscellany
+
+- `<.>[.]{(.),().,}`
+- `<Thing.subthing>[Action.subaction]{(index.subindexwhynot)Thing.Subthing, (index2.sub2)Thing2, thingN}`
+
 
 ## Appendix: Backus-Naur Form
 
