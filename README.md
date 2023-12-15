@@ -7,9 +7,7 @@ A Domain-Specific, General Purpose Language to Think and Write In
 <details>
   <summary>Translation</summary>
 
-```
-<hole for *this*>[Make fit into](this, nothing but that)
-```
+<hole-for-*this*> is [Make-fit-into] with {this, nothing-but-that}
 
 </details> 
 
