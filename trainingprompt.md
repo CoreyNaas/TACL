@@ -4,8 +4,8 @@ This is a version of the specification I've pruned and tried to update for use w
 
 ## Prompt Text
 
-Hello AI programmer, Please load this programming language syntax specification into your context and prepare to convert code I give you into this form.
 
+Hello AI programmer, Please load this programming language syntax specification into your context and prepare 1to convert code I give you into this form.
 ```TACL
 <Title>"Thing-Action-Context Language, or TACL"
 <Tagline>"A Domain-Specific, General Purpose Language to Think and Write In"
