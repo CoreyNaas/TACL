@@ -18,7 +18,7 @@ Hello AI programmer, Please load this programming language syntax specification 
 
 ---
 
-Thing-Action-Context Language (TACL) is a "programming" "language" that centers around the intentionally-vague concept of "Things" which encapsulate data, actions, and control structures. TACL emphasizes readability and simplicity, using unique syntax that mirrors natural language while maintaining computational precision. It is a formulaic way to explain how to do anything. In essence, TACL does "One Thing Well": provide a notation for composing *programs* from *expressions returning values*.
+Thing-Action-Context Language (TACL) is a "programming" "language" that centers around the universal concept of "Things" which encapsulate data, actions, and control structures. TACL emphasizes readability and simplicity, using unique syntax that mirrors natural language while maintaining computational precision. It attempts to be a formulaic way to explain how to do anything.
 
 ```TACL
 # Define the action "Main" with the system "DefineAction" action
@@ -37,31 +37,29 @@ Thing-Action-Context Language (TACL) is a "programming" "language" that centers 
 
 ## Introduction
 
-Thing-Action-Context Language is designed to be a simple, versatile, and intuitive way to describe "doing stuff with things". It is a broad yet basic syntactic language that transcends the conventional boundaries of the physical and the abstract, the concrete and the conceptual.
+Thing-Action-Context Language is designed to be a simple, versatile, and intuitive way to describe "doing stuff with things". In contrast to similar-looking languages such as LISP or Python, our language does not rely on symbolic expressions or prefix notation for function calls. Instead, it uses a quasi-postfix syntax to represent actions and their parameters. Our language also deviates from pseudocode by introducing specific syntax and clearly defined contexts for data transportation, assignment, and execution.
 
-In contrast to similar-looking languages such as LISP or Python, our language does not rely on symbolic expressions or prefix notation for function calls. Instead, it uses a unique and intuitive syntax to represent actions and their parameters. Our language also deviates from pseudocode by introducing specific syntax for control flow statements and error handling, as well as clearly defined contexts for data transportation, assignment, and execution.
+Our language is a significant departure from plain language too. While it is designed to be readable in plain language, it also introduces computational syntax and conventions for clarity and precision. This makes our language more constrained than traditional language without sacrificing readability or understandability.
 
-Our language is a significant departure from plain English too. While it is designed to be readable in plain English, it also introduces computational syntax and language conventions for clarity and precision. This makes our language more expressive and powerful, without sacrificing readability or understandability.
+[Thing Summary Paragraph]
 
-A salient feature of our language is its use of _Things_ as the fundamental units of the language. A "Thing" is intentionally vague, allowing it to merely be a reference to _something_ the user recognizes. Each _Thing_ is distinguished with a unique identifier or label, and can represent various components such as inputs, outputs, and actions.
+We introduce the concept of "contexts" to provide additional information about how to interpret or execute the usage of a *Thing* contained within. Our language uses different types of brackets to denote four different contexts: action context `[]`, transport context `{}`, assignment context `<>`, and index context `()`.
 
-We introduce the concept of "contexts" to provide extra-contextual information about how to interpret and execute the usage of a *Thing*. Our language uses different types of brackets to denote four different contexts: action context `[]`, transport context `{}`, assignment context `<>`, and index context `()`.
+Our language also introduces the concept of "Boxes" and "Piles" to represent collections of *Things*. A *Box* is a loose collection of *Things*, while a *Pile* is an ordered collection of *Things* with associated indexes.
 
-Our language also introduces the concept of "Boxes" and "Piles" to represent collections of _Things_. A _Box_ is a loose collection of _Things_, while a _Pile_ is an ordered collection of _Things_ with associated indexes.
-
-Control flow in our language is represented using actions such as:
+"Control flow" in our language is represented using actions such as:
 
 - `[If]{(c)[TestAction]{Parameters}, (t)[ActionIfTrue]{parameters}, (f)[ActionIfFalse]{parameters}}` for if-then-else statements, 
 - `[While]{(c)[ConditionAction]{parameters}, (a)[ActionSequence]{parameters}}` for while loops, and 
 - `[For]{(i)[InitializationAction]{parameters}, (c)[ConditionAction]{parameters}, (u)[UpdateAction]{parameters}, (a)[ActionSequence]{parameters}}` for for loops.
 
-Error handling in our language is implemented through the simplified `[Attempt]` action which attempts an action and handles exceptions in one go.
+"Error handling" in our language is implemented through the simplified `[Attempt]` action which attempts an action and handles exceptions in one go.
 
 ## TAC
 
 ### Things
 
-The syntax for a *Thing* is flexible. It is enclosed in curly braces `{}` when it represents being transported (i.e., read from), such as the inputs to an action, enclosed in angle brackets `<>` when it represents being assigned (i.e., written to), and enclosed in square brackets `[]` when it represents actions (i.e., executed). When referring to a *Thing* within the language, we simply use its identifier.
+A *Thing* is anything that can be described in plain language. We surround *Things* in different kinds of brackets to represent different kinds of "being". It is enclosed in curly braces `{}` when it represents being transported (i.e., read from), such as the inputs to an action, enclosed in angle brackets `<>` when it represents being assigned (i.e., written to), and enclosed in square brackets `[]` when it represents actions (i.e., executed). When referring to a *Thing* within the language, we simply use its identifier.
 
 In the context of our language, a *Thing* can represent various components:
 - It can be an input to an action, or assigned to another *Thing*.
@@ -70,20 +68,20 @@ In the context of our language, a *Thing* can represent various components:
 
 ### Contexts
 
-In our language, we introduce the concept of "contexts", which are represented by different types of brackets. This concept is rooted in the philosophy of making the language readable in plain English, while also providing extra-contextual information about how to interpret and execute the usage of a Thing.
+In our language, we introduce the concept of "contexts", which are represented by different types of brackets. This concept is rooted in the philosophy of making the language readable in plain language, while also providing additional information about how to interpret or execute the usage of a Thing.
 
 These are the contexts we've defined:
 
-1. **Action Context `[]`**: This context is all about actions. When you see a *Thing* within square brackets, you know that it represents an operation to be executed.
-2. **Transport Context `{}`**: This context transports *Things*, as parameters, to an action or assignment. A Thing within curly braces is a piece of information or data being passed to an action defined in square brackets or an assignment defined in angle brackets. Multiple *Things* are separated by (1) commas, or (2) new lines and indentation, in off-side rule form.
+1. **Action Context `[]`**: This context represents an operation to be executed, and is denoted by square brackets.
+2. **Transport Context `{}`**: This context transports *Things*, as a box or pile, to an action or assignment. A Thing within curly braces is a piece of information or data being passed to an action (defined in square brackets) or an assignment (defined in angle brackets). Multiple *Things* are separated by (1) commas, or (2) new lines and indentation, in off-side rule form.
 3. **Assignment Context** `<>`: This context changes the value or content, if any, of a *Thing*. The input can be a primitive, a literal, an action, or a transport representing multiple *Things*.
-4. **Index Context** `()`: This context contains the index of a *Thing* in a Pile.
+4. **Index Context** `()`: This context contains the index of a *Thing* in a Pile. An index may be a primitive, a literal, or a *Thing*.
 
 ```TACL
 # Valid Assignment Context usages
-<myThing> is "the pen in my right pocket"
-<myAge> is 27
-<myStuff> is {myThing, myAge}
+<myThing>"the pen in my right pocket"
+<myAge>27
+<myStuff>{myThing, myAge}
 <allMyStuff>{myStuff, <myName>"Corey"}
 <allMyStuffOrdered>{(1)myStuff, (2)<myName>"Corey"}
 
@@ -100,7 +98,7 @@ These are the contexts we've defined:
 
 ### Actions
 
-A function is a process or operation that takes certain information (input) and produces a result (output). To simplify our language and make it more intuitive, we replace "Function" with "Action". An "Action" can be seen as a higher-level "Thing" that performs operations and manipulates other "Things". 
+A function is a process or operation that takes given information (input) and produces a result (output). In keeping with "plain language" principles, we replace "Function" with "Action". An "Action" can be seen as a higher-level "Thing" that performs operations and manipulates other "Things". 
 
 Here's an example of how you could write a simple action, using the system `[DefineAction]` action:
 
@@ -114,36 +112,37 @@ Here's an example of how you could write a simple action, using the system `[Def
 	}
 }
 
-[AddNumbers]{1, 2}
+<Result>[AddNumbers]{1, 2}
+[Print]{Result}
 ```
 
-The `[DefineAction]` action takes three parameters in a transport: an Input, a Default output, and a Body.
+The `[DefineAction]` action takes three *Things* in a transport: an Input, a Default output, and a Body.
 
-1. The `<Input>` is a *Thing* that contains the parameters of the action.
+1. The `<Input>` is a *Thing* that contains the passed Box or Pile of inputs to the action.
 2. The `<Default>` is a *Thing* that contains the *Thing* to return if the action doesn't otherwise return. In this example, the string is also being assigned to a *Thing* named "error".
-3. The `<Body>` is a *Thing* that encapsulates the operations of the action. This approach retains the transport and assignment aspects of our language, while also simplifying the syntax.
+3. The `<Body>` is a Box that encapsulates the operations of the action. This approach retains the transport and assignment aspects of our language, while also simplifying the syntax. when this Thing is called in in action context, the Body is what is excecuted.
 
-The `<Return>` is a fourth *Thing*, that returns from the action. It is set to `<Default>` when the action is first executed.
+The `<Return>` is a fourth *Thing*, that returns from the action. It is set to `<Default>` when the action is first executed. It may be omitted, in which case the action will always return the default.
 
-We allow eliding the commas in a transport list if the transport list is fully separated by lines.
+We allow eliding the commas in a transport list if each *Thing* is fully separated by lines.
 
 ## Showing Things Off
 
-This is an example that demonstrates most of the major features of TACL.
+This is an example that demonstrates some of the features of TACL.
 
 ```TACL
 <Main>[DefineAction]{
-	<Input> is {}
-	<Default> is <error> is "An Error has occurred, please panic."
-	<Body> is {
+	<Input>{}
+	<Default><error>"An Error has occurred, please panic."
+	<Body>{
 		# myFavouriteNumber is 7
-		<myFavouriteNumber> is 7
+		<myFavouriteNumber>7
 		
 		# Print with myFavouriteNumber
-		[Print] with {myFavouriteNumber}
+		[Print]{myFavouriteNumber}
 		
 		# Print with CustomAdd with myFavouriteNumber and 4
-		[Print] with {[CustomAdd] with {myFavouriteNumber, 4}}
+		[Print]{[CustomAdd]{myFavouriteNumber, 4}}
 		
 		# myFavouriteNumber is 8
 		<myFavouriteNumber>8
