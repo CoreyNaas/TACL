@@ -1,4 +1,6 @@
-# Thing-Action-Context Language, or TACL
+*(This is out of date, but kept for reference purposes. Most up to date specification in in "trainingprompt.md")*
+
+# Thing-Action-Context Language, TACL
 
 A Domain-Specific, General Purpose Language to Think and Write In
 

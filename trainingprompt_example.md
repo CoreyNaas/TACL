@@ -1,3 +1,7 @@
+# AI Training Prompt Example
+
+# User Prompt
+
 **system**:
 (Personal system prompt removed for privacy.)
 
@@ -514,11 +518,13 @@ In this case, `CalculateDistance` will be attempted. If it executes without an e
 	- Returns true if thing1 is unequal to thing2, and if unthing2 is equal to thing3, ..., and if thingN-1 is unequal to thingN.
 
 --------------------
+# GPT-4 Response
 
 **assistant**:
 Understood. I've loaded the syntax specification for Thing-Action-Context Language (TACL) into context. I'm ready to assist with converting code into TACL form whenever you're ready to proceed.
 
 --------------------
+# User Prompt
 
 **user**:
 "morningpod.py"
@@ -624,6 +630,7 @@ if __name__ == "__main__":
 ```
 
 --------------------
+# GPT-4 Response
 
 **assistant**:
 ```TACL
