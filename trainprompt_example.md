@@ -1,30 +1,23 @@
-# Thing-Action-Context Language, or TACL
+**system**:
+(Personal system prompt removed for privacy.)
 
-A Domain-Specific, General Purpose Language to Think and Write In
+--------------------
 
-Specification Version: v1.0.1 (2023-11-13T19:00:00-07:00)
+**user**:
+Hello AI programmer, Please load this programming language syntax specification into your context and prepare to convert code I give you into this form.
+
+```TACL
+<Title>"Thing-Action-Context Language, or TACL"
+<Tagline>"A Domain-Specific, General Purpose Language to Think and Write In"
+<Author>"**Corey Naas**, November 2023"
+<Website>"https://coreynaas.com/"
+<Email>"coreynaas@outlook.com"
+<License>"Copyright © 2023 Corey Naas. All rights reserved."
+```
 
 ---
 
-**Corey Naas**, November 2023
-
-https://coreynaas.com/
-
-coreynaas@outlook.com
-
-Copyright © 2023 Corey Naas. All rights reserved.
-
----
-
-Thing-Action-Context Language (TACL) is a "programming" "language" that centers around the intentionally-vague concept of "Things" which encapsulate data, actions, and control structures. TACL emphasizes readability and simplicity, using unique syntax that mirrors natural language while maintaining computational precision.
-
-It is a formulaic way to explain how to do anything.
-
-In essence, TACL does "One Thing Well": provide a notation for composing *programs* from *expressions returning values*.
-
-## Hello World
-
-In this program, we define a `Main` action that takes no inputs. This action simply prints "Hello World!" to the standard output and then returns 0.
+Thing-Action-Context Language (TACL) is a "programming" "language" that centers around the intentionally-vague concept of "Things" which encapsulate data, actions, and control structures. TACL emphasizes readability and simplicity, using unique syntax that mirrors natural language while maintaining computational precision. It is a formulaic way to explain how to do anything. In essence, TACL does "One Thing Well": provide a notation for composing *programs* from *expressions returning values*.
 
 ```TACL
 # Define the action "Main" with the system "DefineAction" action
@@ -41,45 +34,7 @@ In this program, we define a `Main` action that takes no inputs. This action s
 [Main]
 ```
 
----
-
-## Version History
-
-| Version | Date       | Author     | Changes                                 | Notes                    |
-| ------- | ---------- | ---------- | --------------------------------------- | ------------------------ |
-| 0.9.0   | 2023-11-08 | Corey Naas | Internal release of TACL specification. | -                        |
-| 1.0.0   | 2023-11-13 | Corey Naas | Public release of TACL specification.   | on https://coreynaas.com |
-| 1.0.5   | 2023-11-14 | Corey Naas | Added Mentions and [Here]               |                          |
-
----
-
-## Table of Contents
-
-1. [Hello World](#Hello%20World)
-1. [Version History](#Version%20History)
-1. [Introduction](#Introduction)
-1. [Syntax Quick Reference Table](#Syntax%20Quick%20Reference%20Table)
-1. [TAC](#TAC)
-	1. [Things](#Things)
-	1. [Contexts](#Contexts)
-	1. [Actions](#Actions)
-1. [Showing Things Off](#Showing%20Things%20Off)
-1. [Orderings Things with Contexts](#Orderings%20Things%20with%20Contexts)
-	1. [Concise and Plain Forms](#Concise%20and%20Plain%20Forms)
-1. [Expanding Things with Boxes and Piles](#Expanding%20Things%20with%20Boxes%20and%20Piles)
-1. [Controlling the Flow of Things](#Controlling%20the%20Flow%20of%20Things)
-	1. [If-Then-Else](#If-Then-Else)
-	1. [Loops](#Loops)
-		1. [While Loop](#While%20Loop)
-		1. [For Loop](#For%20Loop)
-	1. [Attempt](#Attempt)
-	1. [Switch and Case](#Switch%20and%20Case)
-
----
-
 ## Introduction
-
-==BEGIN AI-GENERATED CONTENT==
 
 Thing-Action-Context Language is designed to be a simple, versatile, and intuitive way to describe "doing stuff with things". It is a broad yet basic syntactic language that transcends the conventional boundaries of the physical and the abstract, the concrete and the conceptual.
 
@@ -95,18 +50,13 @@ Our language also introduces the concept of "Boxes" and "Piles" to represent col
 
 Control flow in our language is represented using actions such as:
 
-- `[If]{condition, [ActionIfTrue]{parameters}, [ActionIfFalse]{parameters}}` for if-then-else statements, 
+- `[If]{(c)[TestAction]{Parameters}, (t)[ActionIfTrue]{parameters}, (f)[ActionIfFalse]{parameters}}` for if-then-else statements, 
 - `[While]{[ConditionAction]{parameters}, [ActionSequence]{parameters}}` for while loops, 
 - and `[For]{[InitializationAction]{parameters}, [ConditionAction]{parameters}, [UpdateAction]{parameters}, [ActionSequence]{parameters}}` for for loops.
 
-Error handling in our language is implemented through the simplified `[Attempt]` action which attempts an action and handles exceptions in one go. Our language also supports switch/case statements using the `[Switch]` action followed by a Box or Pile of cases.
+Error handling in our language is implemented through the simplified `[Attempt]` action which attempts an action and handles exceptions in one go.
 
 This language specification serves as a comprehensive guide to our language, providing detailed explanations of its unique features, syntax, and conventions. We hope it will serve as a useful tool for understanding and using our language to its fullest potential.
-
-Regards, 
-Cora
-
-==END AI-GENERATED CONTENT==
 
 ## TAC
 
@@ -137,6 +87,16 @@ These are the contexts we've defined:
 <myStuff> is {myThing, myAge}
 <allMyStuff>{myStuff, <myName>"Corey"}
 <allMyStuffOrdered>{(1)myStuff, (2)<myName>"Corey"}
+
+<MyShoeType>[DefineThingType]{
+    Brand
+    LaceColor
+    Cost
+}
+<MyShoe>[CopyThingType]{MyShoeType}
+<MyShoe.Brand>"New Balance"
+<MyShoe.LaceColor>"Orange"
+<MyShoe.Cost>"45 USD"
 ```
 
 ### Actions
@@ -207,10 +167,10 @@ This is an example that demonstrates most of the major features of TACL.
 		# Print with myNextNewNumber
 		[Print] with {myNextNewNumber}
 		
-		[Condition]{
-			[GreaterThan]{10,2}, 
-			[Print]"10 is greater than 2!", 
-			[Print]"10 is less than 2!"
+		[If]{
+			(c)[GreaterThan]{10,2}
+			(t)[Print]"10 is greater than 2!"
+			(f)[Print]"10 is less than 2!"
 		}
 		
 		[Attempt]{[Print]{[Divide]{1,0}}, [Print]"You can't divide by zero!"}
@@ -218,7 +178,7 @@ This is an example that demonstrates most of the major features of TACL.
 		[Attempt]{
 			[Print]{
 				[Divide]{2,0}
-			},
+			}
 			[Print]"You \*still\* can't divide by zero!!!"
 		}
 		
@@ -362,8 +322,9 @@ When `[Here]` is used, it specifies that the sub*Thing* is part of the composite
 ```TACL
 <Conveyor>[DefineThing]{
 	<RunCommand> is [Here]   # Declares the existence of RunCommand within Conveyor's scope
-	<RunningFeedback> is [Here]   # Declares the existence of RunningFeedback
-	<HesOutput> is [Here]   # Declares the existence of HesOutput
+	<RunningFeedback>[Here]   # Declares the existence of RunningFeedback
+                              # We elide the " is " after this for convenience
+	<HesOutput>[Here]   # Declares the existence of HesOutput
 	<DebounceTimer>[Here]   # Declares the existence of DebounceTimer
 	<HesRaw>[Here]   # Declares the existence of HesRaw
 	<HesDebounce>[DefineAction]{
@@ -371,24 +332,24 @@ When `[Here]` is used, it specifies that the sub*Thing* is part of the composite
 		<Default>1
 		<Body>{
 			[If]{
-				[Equals]{Conveyor.HesRaw, 1},
-				<HesCleared>{
+				(c)[Equals]{Conveyor.HesRaw, 1}
+				(t)<HesCleared>{
 					<HesClearedTimer>[RunTimer]{Conveyor.HesClearedTimer}
 					[If]{
-						[GreaterThan]{HesClearedTimer, Conveyor.DebounceTimer},
-						<Conveyor.HesOutput>1,
-						<Conveyor.HesOutput>{Conveyor.HesOutput}
+						(c)[GreaterThan]{HesClearedTimer, Conveyor.DebounceTimer}
+						(t)<Conveyor.HesOutput>1
+						(f)<Conveyor.HesOutput>{Conveyor.HesOutput}
 					}
 					<Conveyor.HesBlockedTimer>0
 				},
-				<HesBlocked>{
-					<HesBlockedTimer>[RunTimer]{Conveyor.HesBlockedTimer}
-					[If]{
-						[GreaterThan]{HesBlockedTimer, Conveyor.DebounceTimer},
-						<Conveyor.HesOutput>0,
-						<Conveyor.HesOutput>{Conveyor.HesOutput}
+				(f)<HesBlocked>{
+					(c)<HesBlockedTimer>[RunTimer]{Conveyor.HesBlockedTimer}
+					(t)[If]{
+						(c)[GreaterThan]{HesBlockedTimer, Conveyor.DebounceTimer}
+						(t)<Conveyor.HesOutput>0
+						(f)<Conveyor.HesOutput>{Conveyor.HesOutput}
 					}
-					<Conveyor.HesClearedTimer>0
+					(f)<Conveyor.HesClearedTimer>0
 				}
 			}
 			<Return>1
@@ -422,13 +383,13 @@ Scopes in TACL are defined by the boundaries of a Thing definition. Each Thing h
 The If-Then-Else construct in TACL provides a mechanism to execute different sequences of actions based on the evaluation of a condition. This control flow action is designed to enhance decision-making processes within the language. When employing If-Then-Else, we categorize our components into three distinct roles:
 
 1. **Condition Evaluation (`[If]`)**: This is an action that evaluates to a boolean value. The result of this evaluation determines which subsequent path the execution will follow.
-2. **True Branch (`[ActionIfTrue]`)**: This action or sequence of actions is executed if `evaluatedCondition` evaluates to true. It's a series of operations that are enacted when the specified condition holds.
-3. **False Branch (`[ActionIfFalse]`)**: Conversely, if `evaluatedCondition` evaluates to false, this action or sequence of actions will be carried out. It represents an alternate path of execution for scenarios where the condition is not met.
+2. **True Branch (`[ActionIfTrue]`)**: This action or sequence of actions is executed if `[TestAction]` evaluates to true. It's a series of operations that are enacted when the specified condition holds.
+3. **False Branch (`[ActionIfFalse]`)**: Conversely, if `[TestAction]` evaluates to false, this action or sequence of actions will be carried out. It represents an alternate path of execution for scenarios where the condition is not met.
 
 The syntax for using the If-Then-Else construct is as follows:
 
 ```TACL
-[If]{(C)evaluatedCondition, (t)[ActionIfTrue]{trueParams}, (f)[ActionIfFalse]{falseParams}}
+[If]{(c)[TestAction]{Parameters}, (t)[ActionIfTrue]{trueParams}, (f)[ActionIfFalse]{falseParams}}
 ```
 
 An example of this control flow in practice might be:
@@ -487,22 +448,26 @@ In this case, `CalculateDistance` will be attempted. If it executes without an e
 
 ### System/Shell/IO Actions
 
+- `<thing1>[Assign]{thing2}`
+    - Assigns thing1 the contents of thing2. Can also use `<thing1>{thing2}`.
 - `[Assign]{thing1, thing2}`
 	- Assigns thing1 the contents of thing2. This is the same as using the assignment context `<>`.
-- `[AccessAt] with {Pile, Index}`
+- `[AccessAt]{Pile, Index}`
 	- Returns the *Thing* in the given Pile at the given Index. This is the same as using `[Pile](Index)`.
-- `[DefineAction] with {Input, Default, Body}`
+- `<MyAction>[DefineAction]{Input, Default, Body}`
 	- Creates an Action using the given Input(s), Default returned *Thing*, and Body. Returns a *Thing*, which could very well be no*Thing*... null.
-- `[DefineThing] with {thing1, thing2, ... , thingN}`
-	- Creates a Thing with any number of "sub*Things*", also called attributes. Attributes and sub*Things* can nest at any level and use dot notation for addressing. E.g. `<Corey.Age> is 27` Makes the sub-thing `Age` in Thing `Corey` to be `27`.
-- `[Print] with {thing1, thing2, ..., thingN}`
+- `<MyThingType>[DefineThingType]{thing1, thing2, ..., thingN}`
+    - Creates an example "MyThingFromType" Thing Type with the sub-things thing1, thing2, ..., thingN
+- `<MyThingFromType>[CopyThingType]{ThingType}`
+	- Creates an example "MyThingFromType" Thing from the Thing Type ThingType. 
+- `[Print]{thing1, thing2, ..., thingN}`
 	- Prints the contents of thing1, thing2, ..., thingN to the standard output.
-- `[Prompt] with {promptString}`
+- `[Prompt]{promptString}`
 	- Prints the promptString to the standard output and awaits input from the standard input. Returns the line of input. 
 
 ### Control Flow Actions
 
-- `[if]{condition, [ActionIfTrue]{parameters}, [ActionIfFalse]{parameters}}`
+- `[if]{(c)[TestAction]{Parameters}, (t)[ActionIfTrue]{parameters}, (f)[ActionIfFalse]{parameters}}`
 	- If-Then-Else.
 - `[Attempt]{[ActionToAttempt]{parameters}, [ErrorHandler]{parameters}}`
 	- Exception handling.
@@ -515,22 +480,24 @@ In this case, `CalculateDistance` will be attempted. If it executes without an e
 
 - `[Add]{thing1, thing2, ..., thingN}`
 	- Adds thing1 and thing2, and thing3 ..., and thingN and returns the Sum.
-	- `[Plus]{thing1, thing2, ..., thingN}` will work too.
+	- `[Plus]{thing1, thing2, ..., thingN}` will work, too.
 - `[Subtract]{thing1, thing2, ..., thingN}`
 	- Subbtracts thing1 from thing2, and from thing3, ..., from thingN, and returns the Subtrahend.
-	- `[Minus]{thing1, thing2, ..., thingN}` will work too.
+	- `[Minus]{thing1, thing2, ..., thingN}` will work, too.
 - `[Multiply]{thing1, thing2, ..., thingN}`
 	- Multiplies thing1 and thing2, and thing3, ..., and thingN and returns the Product.
-	- `[Times]{thing1, thing2, ..., thingN}` will work too
+	- `[Times]{thing1, thing2, ..., thingN}` will work, too.
 - `[Divide]{thing1, thing2, ..., thingN}`
 	- Divides thing1 by thing2, by thing3, ..., by thingN and returns the Dividend.
-	- `[Frac]{thing1, thing2, ..., thingN}` will work too.
+	- `[Frac]{thing1, thing2, ..., thingN}` will work, too.
 - `[Increment]{thing, increment}`
 	- Increment thing by increment.
 - `[Decrement]{thing, decrement}`
 	- Decrement thing by decrement.
 - `[IsEven]{thing}`
 	- Returns true if thing is even, false if thing is odd.
+- `[IsOdd]{thing}`
+	- Returns true if thing is odd, false if thing is even.
 - `[And]{thing1, thing2, ..., thingN}`
 	- Returns true if thing1, thing2, ..., thingN are all true, returns false if any are false.
 - `[Or]{thing1, thing2, ..., thingN}`
@@ -545,3 +512,221 @@ In this case, `CalculateDistance` will be attempted. If it executes without an e
 	- Returns true if thing1 is equal to thing2, and if thing2 is equal to thing3, ..., and if thingN-1 is equal to thingN.
 - `[Unequals]{thing1, thing2, ..., thingN}`
 	- Returns true if thing1 is unequal to thing2, and if unthing2 is equal to thing3, ..., and if thingN-1 is unequal to thingN.
+
+--------------------
+
+**assistant**:
+Understood. I've loaded the syntax specification for Thing-Action-Context Language (TACL) into context. I'm ready to assist with converting code into TACL form whenever you're ready to proceed.
+
+--------------------
+
+**user**:
+"morningpod.py"
+```python
+from bs4 import BeautifulSoup
+from datetime import datetime
+import os
+import requests
+import subprocess
+from sys import platform 
+import time
+import vlc
+
+def download_latest_weather_podcast(feed_url):
+    response = requests.get(feed_url)
+    response.raise_for_status() # will raise an HTTPError if the HTTP request returned an unsuccessful status code
+    
+    # Parse the feed using BeautifulSoup
+    soup = BeautifulSoup(response.content, features='xml')
+    # Find the first <item> node
+    first_item = soup.find('item')
+    # Get the URL of the first enclosure in the first <item>
+    audio_url = first_item.find('enclosure')['url']
+    
+    # Download the audio file
+    audio_response = requests.get(audio_url)
+    audio_response.raise_for_status()
+    
+    # Generate a file name based on the current date and time
+    file_name = f"weather_podcast_{datetime.now().strftime('%Y%m%d%H%M%S')}.mp3"
+    
+    # Save the file
+    with open(file_name, 'wb') as file:
+        file.write(audio_response.content)
+    
+    return file_name
+
+def play_audio_file(file_name):
+    # Define a VLC instance
+    player = vlc.MediaPlayer(file_name)
+    
+    # Play the audio file
+    player.play()
+    # Wait for the audio to play
+    time.sleep(1) # Give player time to start
+    duration = player.get_length() / 1000 # Get the duration in seconds
+    time.sleep(duration) # Wait for the file to finish playing
+
+def print_text_document(file_path):
+    # Ensure the file exists to avoid errors
+    if os.path.exists(file_path):
+        # Command to print the document
+        command = f'notepad /p "{file_path}"'
+        os.system(command)
+    else:
+        print(f"The file {file_path} does not exist.")
+
+def print_text_document2(file_path):
+    # Check the OS
+    if platform == "win32":
+        # Windows command
+        command = ["notepad", "/p", file_path]
+    elif platform == "linux":
+        # Linux command (you may need to change 'lp' to another command depending on your setup)
+        command = ["lp", file_path]
+    elif platform == "darwin":
+        # macOS command
+        command = ["lp", file_path]
+    else:
+        print("Unsupported operating system.")
+        return
+    
+    # Run the command
+    try:
+        subprocess.run(command, check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred while trying to print the document: {e}")
+
+def main():
+    feed_url = 'https://feed.pod.co/usa-weather-today'
+    
+    # Download the latest weather podcast
+    print("Downloading today's weather podcast...")
+    audio_file = download_latest_weather_podcast(feed_url)
+    
+    # Play the downloaded weather podcast
+    print("Playing today's weather podcast...")
+    play_audio_file(audio_file)
+
+    # Cleanup: delete the audio file after playing
+    os.remove(audio_file)
+
+    # Print the daily form
+    print("Printing Today's Form...")
+    print_text_document('morningpod.txt')
+
+    
+    print("Morning routine completed.")
+
+if __name__ == "__main__":
+    main()
+
+```
+
+--------------------
+
+**assistant**:
+```TACL
+<Main>[DefineAction]{
+    <Input> is {}
+    <Default><Error>"An Error has occurred."
+    <Body>{
+        <FeedUrl>"https://feed.pod.co/usa-weather-today"
+
+        # Download the latest weather podcast
+        [Print]{"Downloading today's weather podcast..."}
+        <AudioFile>[DownloadLatestWeatherPodcast]{FeedUrl}
+
+        # Play the downloaded weather podcast
+        [Print]{"Playing today's weather podcast..."}
+        [PlayAudioFile]{AudioFile}
+
+        # Cleanup: delete the audio file after playing
+        [RemoveFile]{AudioFile}
+
+        # Print the daily form
+        [Print]{"Printing Today's Form..."}
+        [PrintTextDocument]{"morningpod.txt"}
+
+        [Print]{"Morning routine completed."}
+    }
+}
+
+<DownloadLatestWeatherPodcast>[DefineAction]{
+    <Input>{FeedUrl},
+    <Default><Error>"An Error occurred during podcast download."
+    <Body>{
+        <Response>[GetRequest]{FeedUrl}
+        [RaiseForStatus]{Response}
+        <Soup>[ParseWithBeautifulSoup]{Response.content, "xml"}
+        <FirstItem>[Soup.find]{"item"}
+        <AudioUrl>[FirstItem.find]{"enclosure"}["url"]
+        <AudioResponse>[GetRequest]{AudioUrl}
+        [RaiseForStatus]{AudioResponse}
+        <FileName>[FormatString]{"weather_podcast_%s.mp3", [CurrentDateTime]{"%Y%m%d%H%M%S"}}
+        [WriteToFile]{FileName, AudioResponse.content}
+        <Return>{FileName}
+    }
+}
+
+<PlayAudioFile>[DefineAction]{
+    <Input>{FileName},
+    <Default><Error>"An Error occurred while playing the audio file."
+    <Body>{
+        <Player>[CreateVLCMediaPlayer]{FileName}
+        [Player.play]
+        [Sleep]{1}
+        <Duration>[Player.get_length] / 1000
+        [Sleep]{Duration}
+    }
+}
+
+<PrintTextDocument>[DefineAction]{
+    <Input>{FilePath},
+    <Default><Error>"An Error occurred while printing the document."
+    <Body>{
+        [If]{
+            (c)[FileExists]{FilePath},
+            (t)<Command>[FormatString]{"notepad /p \"%s\"", FilePath},
+            (f)[Print]{[FormatString]{"The file %s does not exist.", FilePath}}
+        }
+        [SystemCommand]{Command}
+    }
+}
+
+<PrintTextDocument2>[DefineAction]{
+    <Input>{FilePath},
+    <Default>"Unsupported operating system."
+    <Body>{
+        [If]{
+            (c)[Equals]{[Platform], "win32"},
+            (t)<Command> is ["notepad", "/p", FilePath],
+            (f)[If]{
+                (c)[Equals]{[Platform], "linux"},
+                (t)<Command> is ["lp", FilePath],
+                (f)[If]{
+                    (c)[Equals]{[Platform], "darwin"},
+                    (t)<Command> is ["lp", FilePath],
+                    (f)[Print]{"Unsupported operating system."}
+                }
+            }
+        }
+        [Attempt]{
+            [SubprocessRun]{Command, True},
+            [Print]{[FormatString]{"An error occurred while trying to print the document: %s", [Error]}}
+        }
+    }
+}
+
+[RemoveFile][DefineAction]{
+    <Input>{FileName},
+    <Default><Error>"An Error occurred while removing the file."
+    <Body>{
+        [OsRemove]{FileName}
+    }
+}
+
+[Main]
+```
+
+Please note that for actions such as `GetRequest`, `RaiseForStatus`, `ParseWithBeautifulSoup`, `FormatString`, `CurrentDateTime`, `WriteToFile`, `CreateVLCMediaPlayer`, `Sleep`, `SubprocessRun`, `FileExists`, `SystemCommand`, and `OsRemove`, you would need to define these with the appropriate functionality as they correspond to the Python's requests, os, subprocess, datetime, and vlc library functions and classes. Also, the handling of attributes in TACL, such as `["url"]` and `["content"]`, needs to be adapted to match the TACL's way of accessing properties or elements.
