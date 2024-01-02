@@ -8,7 +8,7 @@
 [Include]{stdio.h}
 <Main>[DefineAction]{
     <Input>{}
-    <Default>"Error!
+    <Default>"Error!"
     <Body>{
         # We need a few more Actions specifically for pointers.
         # <result>[AddressOf]{arg} Returns the address of Thing "arg".

@@ -1,0 +1,59 @@
+####################################################################80#chars####
+# # <Name>"TACLing Chess"
+# # <Author>"Corey Naas"
+# # <Date>"2023-12-31"
+# # <License>"Copyright 2023 Corey Naas. All Rights Reserved."
+# # <Description>
+# # <TargetLanguage>
+
+<ChessBoard>[DefineThingType]{
+    <Squares>[Here]   # 64 squares on the board, each potentially containing a piece
+}
+
+<ChessPiece>[DefineThingType]{
+    <Type>[Here]      # The type of piece (Pawn, Knight, Bishop, Queen, King, Rook)
+    <Position>[Here]  # The current position of the piece on the board (e.g., E4, A1)
+    <Color>[Here]     # The color of the piece (White, Black)
+    <HasMoved>[Here]  # A boolean flag indicating if the piece has moved (for pawns and castling)
+}
+
+# Define each type of piece
+<Pawn>[CopyThingType]{ChessPiece}
+<Knight>[CopyThingType]{ChessPiece}
+<Bishop>[CopyThingType]{ChessPiece}
+<Rook>[CopyThingType]{ChessPiece}
+<Queen>[CopyThingType]{ChessPiece}
+<King>[CopyThingType]{ChessPiece}
+
+# Initialize the board setup
+<InitializeBoard>[DefineAction]{
+    <Input>{}
+    <Default><Error>"An error has occurred during initialization."
+    <Body>{
+        # Create an instance of ChessBoard
+        <Board>[DefineThing]{ChessBoard}
+        
+        # Place Pawns
+        <Board.Squares>{
+            (A2)<WhitePawn1>[DefineThing]{Pawn},
+            (B2)<WhitePawn2>[DefineThing]{Pawn},
+            ...,
+            (A7)<BlackPawn1>[DefineThing]{Pawn},
+            (B7)<BlackPawn2>[DefineThing]{Pawn},
+            ...
+        }
+
+        # Place Rooks
+        <Board.Squares>{
+            (A1)<WhiteRook1>[DefineThing]{Rook},
+            (H1)<WhiteRook2>[DefineThing]{Rook},
+            (A8)<BlackRook1>[DefineThing]{Rook},
+            (H8)<BlackRook2>[DefineThing]{Rook}
+        }
+        
+        # Place Knights, Bishops, Queens, Kings in a similar fashion
+
+        <Return><Board>
+    }
+}
+

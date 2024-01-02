@@ -1,0 +1,25 @@
+{
+  "name": "tacl",
+  "displayName": "Thing-Action-Context Language",
+  "description": "Syntax Highlighting for TACL",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "tacl",
+      "aliases": ["TACL", "tacl"],
+      "extensions": [".tacl",".tac"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "tacl",
+      "scopeName": "source.tacl",
+      "path": "./syntaxes/tacl.tmLanguage.json"
+    }]
+  }
+}

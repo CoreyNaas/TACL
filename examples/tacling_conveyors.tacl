@@ -34,30 +34,30 @@
 # Define the Conveyor and all functionality
 <Conveyor>[DefineThingType]{
 	<Status>[DefineThingType]{
-		(1)Starting
+		(1)<Starting>
 		(2)<Running>{Conveyor.RunFeedback}
 		(3)<Stopped>[NOT]{Conveyor.Running}
 		(4)<NoRunCommand>[NOT]{Conveyor.RunRequest}
-		(5)TimedOut
+		(5)<TimedOut>
 		(6)<Cascaded>{Conveyor.Cascaded}
 		(7)<Jammed>{Conveyor.Jammed}
-		(8)Withheld
+		(8)<Withheld>
 		(9)<EStopActive>{Conveyor.EStopActive}
-		(10)OutOfService
-		(11)FailedToRun
-		(12)FailedToStop
-		(13)Overloaded
+		(10)<OutOfService>
+		(11)<FailedToRun>
+		(12)<FailedToStop>
+		(13)<Overloaded>
 	}
 	<Manual>[DefineThingType]{
-		(1)Enable
-		(2)Request
+		(1)<Enable>
+		(2)<Request>
 	}
 	<Config>[DefineThingType]{
-		(1)DebounceTime
-		(2)JamTime
-		(3)OverloadTime
-		(4)TimeoutTime
-		(5)DelayTime
+		(1)<DebounceTime>
+		(2)<JamTime>
+		(3)<OverloadTime>
+		(4)<TimeoutTime>
+		(5)<DelayTime>
 	}
 	<DebouncePhotoeye>[DefineAction]{
 		<Input>{PhotoeyeRaw, DebounceTime}
@@ -93,7 +93,8 @@
 		<Body>{
 			<JamTimer>[RunTimer]{[AND]{
 				Conveyor.Running
-				[NOT]{Photoeye}}
+				[NOT]{Photoeye}
+                }
 			}
 			[If]{
 				(c)<>[GEQ]{JamTimer, JamTime}

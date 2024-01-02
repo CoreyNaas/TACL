@@ -32,6 +32,6 @@
 # The [CopyThingType] action makes clear you're copying the "Type" of a given
 #   Thing, not the contents of it, e.g. declaring that something is "just like
 #   another Thing" (but not the exact same Thing).
-<myShoe> is [CopyThingType] with {Shoe}
-<myFoot> is "My left foot"
+<myShoe>[CopyThingType]{Shoe}
+<myFoot>"My left foot"
 [myShoe.PutOn]{myFoot}

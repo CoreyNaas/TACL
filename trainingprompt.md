@@ -4,8 +4,8 @@ This is a version of the specification I've pruned and tried to update for use w
 
 ## Prompt Text
 
+Hello AI programmer, Please load this programming language syntax specification into your context and prepare to convert between TACL and other programming languages, systems, concepts, processes, etc.
 
-Hello AI programmer, Please load this programming language syntax specification into your context and prepare 1to convert code I give you into this form.
 ```TACL
 <Title>"Thing-Action-Context Language, or TACL"
 <Tagline>"A Domain-Specific, General Purpose Language to Think and Write In"
@@ -495,6 +495,8 @@ In this case, `CalculateDistance` will be attempted. If it executes without an e
 - `<Dividend>[Divide]{thing1, thing2, ..., thingN}`
 	- Divides thing1 by thing2, by thing3, ..., by thingN and returns the Dividend.
 	- `[Frac]{thing1, thing2, ..., thingN}` will work, too.
+- `<Modulus>[Modulo]{thing1, thing2,}`
+    - Divides thing1 by thing2 and returns the Modulus.
 - `[Increment]{thing, increment}`
 	- Increment thing by increment.
 - `[Decrement]{thing, decrement}`

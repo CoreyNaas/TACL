@@ -1,0 +1,673 @@
+####################################################################80#chars####
+# # <Name>"TACLing Dota 2"
+# # <Author>"Corey Naas"
+# # <Date>"2023-12-29"
+# # <License>"Copyright 2023 Corey Naas. All Rights Reserved."
+# # <Description>
+# # <TargetLanguage>
+
+####################################################################80#chars####
+# Prompted GPT-4 to write "the TACL required to set up and establish the 
+#   game map, layout, paths, and routes."
+
+<GameMap>[DefineThingType]{
+    <Radiant>[Here]
+    <Dire>[Here]
+    <Lanes>[Here]{
+        <Top>[Here]
+        <Middle>[Here]
+        <Bottom>[Here]
+    }
+    <Jungle>[Here]
+    <Towers>[Here]{
+        <TierOne>[Here]
+        <TierTwo>[Here]
+        <TierThree>[Here]
+        <TierFour>[Here]
+    }
+    <Fountain>[Here]
+    <BaseShop>[Here]
+    <Courier>[Here]
+    <RuneSpots>[Here]{
+        <Bounty>[Here]
+        <Water>[Here]
+        <PowerUp>[Here]
+    }
+}
+
+<DayNightCycle>[DefineThingType]{
+    <Day>[Here]
+    <Night>[Here]
+    <CycleTime>5
+}
+
+<Vision>[DefineThingType]{
+    <FogOfWar>[Here]
+    <ObserverWards>[Here]
+    <SharedVision>[Here]
+}
+
+####################################################################80#chars####
+# Prompted GPT-4 to "convert the gameplay mechanics to TACL"
+
+<Gameplay>[DefineThingType]{
+    <Teams>[DefineThingType]{
+        <Radiant>[Here]
+        <Dire>[Here]
+    }
+    <Heroes>[Here]
+    <Ancient>[Here]
+    <StrategicBalance>[DefineThingType]{
+        <Advantage>[Here]
+        <PreventSnowball>[Here]
+    }
+}
+
+<SelectHero>[DefineAction]{
+    <Input>{player, availableHeroes}
+    <Default><Error>"Invalid hero selection."
+    <Body>{
+        <SelectedHero>[Choose]{availableHeroes}
+        <Return>{SelectedHero}
+    }
+}
+
+<GrowInStrength>[DefineAction]{
+    <Input>{hero, duration}
+    <Default><Error>"Growth failed."
+    <Body>{
+        <Growth>[Increment]{hero.Power, duration}
+        <Return>{Growth}
+    }
+}
+
+<DestroyAncient>[DefineAction]{
+    <Input>{attackingTeam, defendingTeam}
+    <Default><Error>"Attack on Ancient failed."
+    <Body>{
+        <AttackResult>[Attack]{attackingTeam.Heroes, defendingTeam.Ancient}
+        <CheckDefeat>[If]{
+            (c)[IsDestroyed]{defendingTeam.Ancient},
+            (t)<Return>1,
+            (f)<Return>0
+        }
+    }
+}
+
+<Match>[DefineAction]{
+    <Input>{}
+    <Default><Error>"An error occurred during the match."
+    <Body>{
+        <TeamRadiant>[DefineThing]{Teams.Radiant}
+        <TeamDire>[DefineThing]{Teams.Dire}
+        <HeroSelection>[ForEach]{
+            (t)[SelectHero]{player, availableHeroes}
+            (p)player.[Players]
+        }
+        <MatchProgress>[While]{
+            (c)[Not]{[Equals]{TeamRadiant.Ancient, "Destroyed"}, [Equals]{TeamDire.Ancient, "Destroyed"}},
+            (a)[ActSequence]{
+                [GrowInStrength]{hero, gameTime},
+                [StrategicDecision]{hero, enemyTeam},
+                [DestroyAncient]{attackingTeam, defendingTeam}
+                # Additional match actions can be inserted here
+            }
+        }
+        [If]{
+            (c)[IsDestroyed]{TeamRadiant.Ancient},
+            (t)[DeclareWinner]{TeamDire},
+            (f)[DeclareWinner]{TeamRadiant}
+        }
+        <Return>0
+    }
+}
+
+####################################################################80#chars####
+# Prompted GPT-4 to "convert the vision and runes gameplay to TACL"
+
+<VisionMechanics>[DefineThingType]{
+    <ObserverWard>[DefineThingType]{
+        <ProvideVision>[DefineAction]{
+            <Input>{location}
+            <Body>{
+                <UpdateVisionMap>[Modify]{Map.Vision, location, "Visible"}
+            }
+        }
+        <PlaceWard>[DefineAction]{
+            <Input>{player, location}
+            <Body>{
+                <ObserverWard>[CreateThing]{}
+                <ObserverWard.ProvideVision>{location}
+                <Return>{ObserverWard}
+            }
+        }
+    }
+    <FogOfWar>[Here]
+    <UpdateVision>[DefineAction]{
+        <Input>{gameTime, dayNightCycle, heroes}
+        <Body>{
+            <ApplyFog>[Modify]{Map.Vision, "Global", "FogOfWar"}
+            [ForEach]{
+                (t)[Hero.UpdateVision]{dayNightCycle},
+                (p)heroes
+            }
+        }
+    }
+}
+
+<RuneMechanics>[DefineThingType]{
+    <Rune>[DefineThingType]{
+        <Bounty>[Here]
+        <Water>[Here]
+        <PowerUp>[Here]
+    }
+    <SpawnRune>[DefineAction]{
+        <Input>{gameTime}
+        <Body>{
+            [If]{
+                (c)[Equals]{[Modulo]{gameTime, 3}, 0},
+                (t)[CreateThing]{RuneMechanics.Rune.Bounty}
+            }
+            [If]{
+                (c)[And]{[GreaterOrEqual]{gameTime, 2}, [Equals]{[Modulo]{gameTime, 2}, 0}},
+                (t)[CreateThing]{RuneMechanics.Rune.Water}
+            }
+            [If]{
+                (c)[And]{[GreaterOrEqual]{gameTime, 6}, [Equals]{[Modulo]{gameTime, 2}, 0}},
+                (t)[CreateThing]{RuneMechanics.Rune.PowerUp}
+            }
+            <Return>{gameTime}
+        }
+    }
+    <CollectRune>[DefineAction]{
+        <Input>{hero, rune}
+        <Body>{
+            <ApplyRuneEffect>[Modify]{hero.Stats, rune.Effect}
+            [DestroyThing]{rune}
+            <Return>{hero}
+        }
+    }
+}
+
+<DayNightCycle>[DefineThingType]{
+    <Day>[Here]
+    <Night>[Here]
+    <ToggleCycle>[DefineAction]{
+        <Input>{currentCycle, gameTime}
+        <Body>{
+            [If]{
+                (c)[Equals]{[Modulo]{gameTime, 5}, 0},
+                (t)[Switch]{currentCycle, [If]{(c)[Equals]{currentCycle, DayNightCycle.Day}, (t)DayNightCycle.Night, (f)DayNightCycle.Day}},
+                (f)[NoOperation]{}
+            }
+            <Return>{currentCycle}
+        }
+    }
+}
+
+
+####################################################################80#chars####
+# Prompted GPT-4 to "convert the creeps mechanics to TACL"
+
+<Creeps>[DefineThingType]{
+    <LaneCreep>[DefineThingType]{
+        <Health>[Here]
+        <Damage>[Here]
+        <Bounty>[Here]
+    }
+    <SpawnCreeps>[DefineAction]{
+        <Input>{gameTime, lanes}
+        <Body>{
+            [If]{
+                (c)[Equals]{gameTime % 1, 0},
+                (t)[ForEach]{
+                    (t)[CreateThing]{LaneCreep},
+                    (p)lanes
+                }
+            }
+        }
+    }
+    <MoveCreeps>[DefineAction]{
+        <Input>{creeps, targetLocation}
+        <Body>{
+            [ForEach]{
+                (t)[Modify]{creep.Location, targetLocation},
+                (p)creeps
+            }
+        }
+    }
+    <CreepCombat>[DefineAction]{
+        <Input>{creep, target}
+        <Body>{
+            [While]{
+                (c)[And]{[Not][IsDestroyed]{creep}, [Not][IsDestroyed]{target}},
+                (a)[Sequence]{
+                    [DealDamage]{creep, target},
+                    [DealDamage]{target, creep}
+                }
+            }
+            [If]{
+                (c)[IsDestroyed]{target},
+                (t)[Modify]{creep.Killer.Gold, [Add]{creep.Killer.Gold, creep.Bounty}}
+            }
+        }
+    }
+}
+
+<DealDamage>[DefineAction]{
+    <Input>{attacker, defender}
+    <Body>{
+        [Modify]{defender.Health, [Subtract]{defender.Health, attacker.Damage}}
+        [If]{
+            (c)[LessOrEqual]{defender.Health, 0},
+            (t)[SetDestroyed]{defender}
+        }
+    }
+}
+
+####################################################################80#chars####
+# Prompted GPT-4 to "convert the heroes mechanics to TACL"
+
+<Heroes>[DefineThingType]{
+    <Hero>[DefineThingType]{
+        <Health>[Here]
+        <Mana>[Here]
+        <Damage>[Here]
+        <Armor>[Here]
+        <Position>[Here]
+        <Abilities>[DefineThingType]{
+            <Ability>[DefineThingType]{
+                <Cooldown>[Here]
+                <ManaCost>[Here]
+                <Effect>[Here]
+            }
+            <UseAbility>[DefineAction]{
+                <Input>{hero, ability, target}
+                <Body>{
+                    [If]{
+                        (c)[And]{
+                            [GreaterOrEqual]{hero.Mana, ability.ManaCost},
+                            [IsOffCooldown]{ability}
+                        },
+                        (t)[Sequence]{
+                            [ApplyAbilityEffect]{ability.Effect, target},
+                            [Modify]{hero.Mana, [Subtract]{hero.Mana, ability.ManaCost}},
+                            [SetCooldown]{ability}
+                        },
+                        (f)<Error>"Unable to use ability. Check mana or cooldown."
+                    }
+                }
+            }
+        }
+        <LevelUp>[DefineAction]{
+            <Input>{hero}
+            <Body>{
+                [Modify]{hero.Level, [Add]{hero.Level, 1}}
+                [ForEach]{
+                    (t)[Modify]{ability, [LevelUpEffect]{ability}},
+                    (p)hero.Abilities
+                }
+            }
+        }
+    }
+    [MoveHero][DefineAction]{
+        <Input>{hero, destination}
+        <Body>{
+            [Modify]{hero.Position, destination}
+        }
+    }
+}
+
+<ApplyAbilityEffect>[DefineAction]{
+    <Input>{effect, target}
+    <Body>{
+        <Switch>{
+            (c)[Equals]{effect.Type, "Damage"},
+            (t)[Modify]{target.Health, [Subtract]{target.Health, effect.Value}},
+            (c)[Equals]{effect.Type, "Heal"},
+            (t)[Modify]{target.Health, [Add]{target.Health, effect.Value}},
+            (c)[Equals]{effect.Type, "Buff"},
+            (t)[Modify]{target, [AddBuff]{target, effect}},
+            (c)[Equals]{effect.Type, "Debuff"},
+            (t)[Modify]{target, [AddDebuff]{target, effect}}
+        }
+        [If]{
+            (c)[LessOrEqual]{target.Health, 0},
+            (t)[SetDestroyed]{target}
+        }
+    }
+}
+
+<SetCooldown>[DefineAction]{
+    <Input>{ability}
+    <Body>{
+        [Modify]{ability.Cooldown, ability.MaxCooldown}
+    }
+}
+
+<IsOffCooldown>[DefineFunction]{
+    <Input>{ability}
+    <Return>[Equals]{ability.Cooldown, 0}
+}
+
+
+
+####################################################################80#chars####
+# Prompted GPT-4 to "convert the hero roles gameplay to TACL"
+
+<HeroRoles>[DefineThingType]{
+    <Carry>[DefineThingType]{
+        <Farm>[DefineAction]{
+            <Input>{carry, creeps}
+            <Body>{
+                [ForEach]{
+                    (t)[Hero.CreepCombat]{carry, creep},
+                    (p)creeps
+                }
+            }
+        }
+        <PushLane>[DefineAction]{
+            <Input>{carry, lane}
+            <Body>{
+                [MoveHero]{carry, lane.Front}
+                [Carry.Farm]{carry, lane.Creeps}
+            }
+        }
+    }
+    <Support>[DefineThingType]{
+        <Harass>[DefineAction]{
+            <Input>{support, enemyHeroes}
+            <Body>{
+                [ForEach]{
+                    (t)[Hero.UseAbility]{support, support.Ability, enemyHero},
+                    (p)enemyHeroes
+                }
+            }
+        }
+        <WardMap>[DefineAction]{
+            <Input>{support, locations}
+            <Body>{
+                [ForEach]{
+                    (t)[VisionMechanics.ObserverWard.PlaceWard]{support, location},
+                    (p)locations
+                }
+            }
+        }
+    }
+    <Offlane>[DefineThingType]{
+        <Disrupt>[DefineAction]{
+            <Input>{offlaner, enemyCreeps}
+            <Body>{
+                [ForEach]{
+                    (t)[Hero.CreepCombat]{offlaner, enemyCreep},
+                    (p)enemyCreeps
+                }
+            }
+        }
+        <Survive>[DefineAction]{
+            <Input>{offlaner, threats}
+            <Body>{
+                [If]{
+                    (c)[IsUnderThreat]{offlaner, threats},
+                    (t)[MoveHero]{offlaner, offlaner.SafePosition}
+                }
+            }
+        }
+    }
+    <Midlane>[DefineThingType]{
+        <ControlRune>[DefineAction]{
+            <Input>{midlaner}
+            <Body>{
+                [MoveHero]{midlaner, Map.RuneSpots.ClosestToMid}
+                [RuneMechanics.CollectRune]{midlaner, Map.RuneSpots.ClosestToMid.Rune}
+            }
+        }
+        <Gank>[DefineAction]{
+            <Input>{midlaner, enemyHero}
+            <Body>{
+                [MoveHero]{midlaner, enemyHero.Position}
+                [Hero.UseAbility]{midlaner, midlaner.BestGankingAbility, enemyHero}
+            }
+        }
+    }
+    <Jungler>[DefineThingType]{
+        <JungleFarm>[DefineAction]{
+            <Input>{jungler, neutralCreeps}
+            <Body>{
+                [ForEach]{
+                    (t)[Hero.CreepCombat]{jungler, neutralCreep},
+                    (p)neutralCreeps
+                }
+            }
+        }
+        <Gank>[DefineAction]{
+            <Input>{jungler, enemyHero}
+            <Body>{
+                [MoveHero]{jungler, enemyHero.Position}
+                [Hero.UseAbility]{jungler, jungler.BestGankingAbility, enemyHero}
+            }
+        }
+    }
+}
+
+<IsUnderThreat>[DefineFunction]{
+    <Input>{hero, enemies}
+    <Return>{
+        [Any]{
+            (c)[LessOrEqual]{hero.Health, [CalculateThreatLevel]{enemy, hero}},
+            (p)enemies
+        }
+    }
+}
+
+<CalculateThreatLevel>[DefineFunction]{
+    <Input>{enemy, hero}
+    <Return>[Multiply]{enemy.Damage, [EstimateEngagementDuration]{enemy, hero}}
+}
+
+<EstimateEngagementDuration>[DefineFunction]{
+    <Input>{enemy, hero}
+    <Return>{
+        [Divide]{
+            [Distance]{hero.Position, enemy.Position},
+            [Max]{hero.MovementSpeed, enemy.MovementSpeed}
+        }
+    }
+}
+
+
+####################################################################80#chars####
+# Prompted GPT-4 to "convert the items, store, etc. gameplay to TACL"
+
+<ItemMechanics>[DefineThingType]{
+    <Item>[DefineThingType]{
+        <Cost>[Here]
+        <Effect>[Here]
+    }
+    <Store>[DefineThingType]{
+        <Inventory>[Here]
+        <BuyItem>[DefineAction]{
+            <Input>{hero, item}
+            <Body>{
+                [If]{
+                    (c)[GreaterOrEqual]{hero.Gold, item.Cost},
+                    (t)[Sequence]{
+                        [Modify]{hero.Gold, [Subtract]{hero.Gold, item.Cost}},
+                        [AddItemToInventory]{hero, item}
+                    },
+                    (f)<Error>"Insufficient gold to purchase item."
+                }
+            }
+        }
+        <SellItem>[DefineAction]{
+            <Input>{hero, item}
+            <Body>{
+                [If]{
+                    (c)[Contains]{hero.Inventory, item},
+                    (t)[Sequence]{
+                        [RemoveItemFromInventory]{hero, item},
+                        [Modify]{hero.Gold, [Add]{hero.Gold, [Divide]{item.Cost, 2}}}
+                    },
+                    (f)<Error>"Item not found in inventory."
+                }
+            }
+        }
+    }
+    <AddItemToInventory>[DefineAction]{
+        <Input>{hero, item}
+        <Body>{
+            [Append]{hero.Inventory, item}
+        }
+    }
+    <RemoveItemFromInventory>[DefineAction]{
+        <Input>{hero, item}
+        <Body>{
+            [Remove]{hero.Inventory, item}
+        }
+    }
+}
+
+<UseItem>[DefineAction]{
+    <Input>{hero, item, target}
+    <Body>{
+        [If]{
+            (c)[Contains]{hero.Inventory, item},
+            (t)[Sequence]{
+                [ApplyItemEffect]{item.Effect, target},
+                [If]{
+                    (c)[Equals]{item.Type, "Consumable"},
+                    (t)[RemoveItemFromInventory]{hero, item}
+                }
+            },
+            (f)<Error>"Item not found in inventory."
+        }
+    }
+}
+
+<ApplyItemEffect>[DefineAction]{
+    <Input>{effect, target}
+    <Body>{
+        <Switch>{
+            (c)[Equals]{effect.Type, "Heal"},
+            (t)[Modify]{target.Health, [Add]{target.Health, effect.Value}},
+            (c)[Equals]{effect.Type, "Mana"},
+            (t)[Modify]{target.Mana, [Add]{target.Mana, effect.Value}},
+            (c)[Equals]{effect.Type, "Buff"},
+            (t)[Modify]{target, [AddBuff]{target, effect}},
+            // Additional effects can be defined here
+        }
+    }
+}
+
+####################################################################80#chars####
+# Prompted GPT-4 to "convert the match phases gameplay to TACL"
+
+<MatchPhases>[DefineThingType]{
+    <EarlyGame>[DefineThingType]{
+        <Laning>[DefineAction]{
+            <Input>{heroes}
+            <Body>{
+                [ForEach]{
+                    (t)[HeroRoles.Lane]{hero},
+                    (p)heroes
+                }
+            }
+        }
+        <RuneControl>[DefineAction]{
+            <Input>{heroes}
+            <Body>{
+                [ForEach]{
+                    (c)[IsMidlaner]{hero},
+                    (t)[HeroRoles.Midlane.ControlRune]{hero},
+                    (p)heroes
+                }
+            }
+        }
+    }
+    <MidGame>[DefineThingType]{
+        <Ganking>[DefineAction]{
+            <Input>{heroes}
+            <Body>{
+                [ForEach]{
+                    (t)[HeroRoles.Gank]{hero, [FindVulnerableEnemy]{heroes}},
+                    (p)heroes
+                }
+            }
+        }
+        <ObjectiveControl>[DefineAction]{
+            <Input>{heroes, objectives}
+            <Body>{
+                [ForEach]{
+                    (t)[HeroRoles.PushLane]{hero, [IdentifyObjectiveLane]{objectives}},
+                    (p)heroes
+                }
+            }
+        }
+    }
+    <LateGame>[DefineThingType]{
+        <HighGroundSiege>[DefineAction]{
+            <Input>{heroes}
+            <Body>{
+                [ForEach]{
+                    (t)[HeroRoles.PushLane]{hero, [IdentifyHighGroundObjective]{}},
+                    (p)heroes
+                }
+            }
+        }
+        <Teamfight>[DefineAction]{
+            <Input>{heroes}
+            <Body>{
+                [If]{
+                    (c)[IsTeamfightImminent]{},
+                    (t)[ForEach]{
+                        (t)[HeroRoles.Teamfight]{hero},
+                        (p)heroes
+                    }
+                }
+            }
+        }
+    }
+}
+
+<FindVulnerableEnemy>[DefineFunction]{
+    <Input>{heroes}
+    <Return>{
+        [MinBy]{heroes, hero.VulnerabilityScore}
+    }
+}
+
+<IdentifyObjectiveLane>[DefineFunction]{
+    <Input>{objectives}
+    <Return>{
+        [MinBy]{objectives, objective.PriorityScore}
+    }
+}
+
+<IdentifyHighGroundObjective>[DefineFunction]{
+    <Return>{
+        [Find]{Map.Objectives, [Equals]{objective.Type, "HighGround"}}
+    }
+}
+
+<IsTeamfightImminent>[DefineFunction]{
+    <Return>{
+        [Any]{
+            (c)[IsWithinRange]{hero.Position, enemy.Position, TeamfightEngagementRange},
+            (p)Map.Heroes
+        }
+    }
+}
+
+<HeroRoles.Lane>[DefineAction]{
+    <Input>{hero}
+    <Body>{
+        // Define actions specific to laning for each hero role
+    }
+}
+
+<HeroRoles.Teamfight>[DefineAction]{
+    <Input>{hero}
+    <Body>{
+        // Define actions specific to teamfighting for each hero role
+    }
+}

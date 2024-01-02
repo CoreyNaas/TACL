@@ -5,11 +5,6 @@
 # # <License>"Copyright 2023 Corey Naas. All Rights Reserved."
 # # <TargetLanguage>"Narrative"
 
-<Corey.Mood> is "Not Great"
-# Ending the next line with a double quote begins a multi-line string, until
-#   The end of the string denoted by a doubleqouote and end-transport
-[Corey.Explain] with {" 
-I'm not feeling great today.
-Plenty hydrated and ate, but just all-around meh.
-"}
-<Corey.Mood> is "A little better"
+<Corey.Mood>"Content"
+[Corey.Explain]{"It's a great day to be alive!"}
+<Corey.Mood>"Great"
