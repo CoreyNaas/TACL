@@ -2,19 +2,16 @@
 
 A Domain-Specific, General Purpose Language to Think and Write In
 
-"We gotta find a way to [make] \{this\} [fit] into the \<hole for *this*\>, using \{nothing but that\}." - [Apollo 13](https://www.youtube.com/watch?v=ry55--J4_VQ)
+>"We gotta find a way to [make] \{this\} [fit into] the \<hole for *this*\>, using \{nothing but that\}." - [Apollo 13](https://www.youtube.com/watch?v=ry55--J4_VQ)
 
 <details>
-  <summary>Translation</summary>
+  <summary>Translated In TACL:</summary>
 
 <hole-for-*this*> is [Make-fit-into] with {this, nothing-but-that}
 
 </details> 
 
 ---
-
-- [Specification](specification.md)
-- [Appendices (original examples)](appendices.md)
 
 ```
 <theAcronym>[Acronymize]{"Thing-Action-Context Language"}
@@ -31,6 +28,14 @@ A Domain-Specific, General Purpose Language to Think and Write In
 ```
 
 </details> 
+
+## Introduction
+
+- [Specification](specification.md)
+- [Example: TACLing Conveyors](/examples/tacling_conveyors.tacl)
+- [Example: TACLing Latin](/examples/tacling_latin.tacl)
+- [Example: TACling Chess](/examples/tacling_chess.tacl)
+- [All Examples](/examples/)
 
 Thing-Action-Context Language, or TACL, is a "programming" "language" I designed to act as an "intermediate language" between my brain and a language model or AI that can produce code. I "write" code in plain English, using a simple brackets-only syntax, and give that to the AI to turn into actual code in my target language. I can then review the code, and focus on the last 90% of programming that requires a human mind. The syntax is flexible enough that I can manually "call out" target-language-specific expressions (such as an "[AssignType](/examples/tacling_c_pointers.tacl)" action that would be required in C-targeted TACL but not in Python-targeted TACL) as needed, and focus on declaring what I want to see performed in the target code, as brief as possible and as detailed as required.
 
@@ -71,7 +76,7 @@ I also asked GPT-4 how other software engineers could use TACL, and *why* they m
 >4. Prototyping: TACL can be advantageous for quick prototyping and testing of ideas. A software engineer can rapidly prototype an algorithm or workflow in TACL to validate its effectiveness before committing to a full implementation in the main programming language, saving time and resources.
 >5. Documenting Intent: TACL can be used to document the intent and design decisions of a particular piece of code or system. Writing in TACL can provide a clear and concise explanation that can be referred back to when revisiting the code in the future, or when onboarding new engineers who need to understand the system's architecture.
 
-Although the final implementation will be in the target language, TACL can enhance the preliminary stages of software development, making the transition from concept to code smoother and more reliable.
+> Although the final implementation will be in the target language, TACL can enhance the preliminary stages of software development, making the transition from concept to code smoother and more reliable.
 
 
 ---
@@ -80,6 +85,6 @@ https://coreynaas.com/
 
 coreynaas@outlook.com
 
-Copyright © 2023 Corey Naas. All rights reserved.
+© 2023 Corey Naas. All rights reserved.
 
 ---
