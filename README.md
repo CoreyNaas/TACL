@@ -46,19 +46,7 @@ I asked GPT-4 what the "do one thing well" that this language provides is, given
 
 In this program, we define a `Main` action that takes one input. This action simply prints "Hello World! ..." to the output and returns 0. (If it returns "An Error has occurred.", the reader is encouraged to contact a physician.)
 
-```TACL
-# Define the action "Main" with the system "DefineAction" action
-<Main>[DefineAction]{
-	<Input>{myName}
-	<Default><Error>"An Error has occurred."
-	<Body>{
-		[Print]{"Hello World! My name is ", myName, "!"}
-		<Return>{0}
-	}
-}
-
-# Execute the action "Main" with my name as the input
-[Main]{"Corey"}
+![helloworldexample](helloworld.png)
 
 ## Run the code above in your head and see below for the answer!
 ```
