@@ -72,7 +72,7 @@
 						(t)<Conveyor.PhotoeyeOutput>1
 						(f)<Conveyor.PhotoeyeOutput>{Conveyor.PhotoeyeOutput}
 					}
-					<PhotoeyeBlockedTimer>0
+					<PhotoeyeBlockedTimer>0, # reset opposite timer
 				}
 				(f)<PhotoeyeBlocked>{
 					<PhotoeyeBlockedTimer>[RunTimer]{PhotoeyeBlockedTimer}
@@ -81,7 +81,7 @@
 						(t)<Conveyor.PhotoeyeOutput>0
 						(f)<Conveyor.PhotoeyeOutput>{Conveyor.PhotoeyeOutput}
 					}
-					<PhotoeyeClearedTimer>0
+					<PhotoeyeClearedTimer>0 # Reset opposite timer
 				}
 			}
 			<Return>1
