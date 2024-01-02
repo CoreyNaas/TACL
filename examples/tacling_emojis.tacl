@@ -1,0 +1,26 @@
+####################################################################80#chars####
+# # <Name>"TACLing Latin"
+# # <Author>"Corey Naas"
+# # <Date>"2024-01-01"
+# # <License>"Copyright 2023 Corey Naas. All Rights Reserved."
+# # <Description>"Misc examples of using emojis in TACL"
+# # <TargetLanguage>
+
+# Below is an example of a TACL program that uses emojis to define a simple 
+#   action that checks if a number (represented by a dice emoji) is greater than
+#   5 and then prints a corresponding emoji response.
+<🎲>[DefineAction]{
+    <Input>{🎲}
+    <Default><Error>"⚠️"
+    <Body>{
+        [If]{
+            (c)[GreaterThan]{🎲, 5}
+            (t)[Print]{"🎉"}
+            (f)[Print]{"😢"}
+        }
+        <Return>0
+    }
+}
+
+<Result>[🎲]{6}
+[Print]{Result}
