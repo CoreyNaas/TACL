@@ -49,7 +49,7 @@ In this program, we define a `Main` action that takes one input. This action s
 ![helloworldexample](helloworld.png)
 
 ## Run the code above in your head and see below for the answer!
-```
+
 
 <details>
   <summary>Evaluation</summary>
