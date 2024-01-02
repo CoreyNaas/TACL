@@ -5,9 +5,9 @@ A Domain-Specific, General Purpose Language to Think and Write In
 >"We gotta find a way to [make] \{this\} [fit into] the \<hole for *this*\>, using \{nothing but that\}." - [Apollo 13](https://www.youtube.com/watch?v=ry55--J4_VQ)
 
 <details>
-  <summary>Translated In TACL:</summary>
+  <summary>Translated into TACL:</summary>
 
-<hole-for-*this*> is [Make-fit-into] with {this, nothing-but-that}
+<hole-for-*this*> has [Make-fit-into] performed on it with {this, nothing-but-that}
 
 </details> 
 
@@ -49,8 +49,7 @@ In this program, we define a `Main` action that takes one input. This action s
 
 ![helloworldexample](helloworld.png)
 
-## Run the code above in your head and see below for the answer!
-
+Run the code above in your head and see below for the answer!
 
 <details>
   <summary>Evaluation</summary>
