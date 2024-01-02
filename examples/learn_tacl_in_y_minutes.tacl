@@ -6,32 +6,195 @@
 # # <TargetLanguage>"TACL"
 
 # A comment.
-0   # Evaluates to 0.
-1   # Evaluates to 1.
 <>  # Null assignment.
-<identifier> is 1  # Assigning integer number 1 at "identifier" data and code storage space.
-<identifier>       # Assigning null at "identifier" data and code storage space.
-<Something> is 1              # Assigning integer number 1 to "Something".
-<Something>1                  # Assigning integer number 1 to "Something" in concise form.
-<Something> is "Hello World"  # Assigning string literal "Hello World" to "Something".
+<identifier>1  # Assigning integer number 1 at "identifier" data and code storage space.
+<identifier>   # Assigning null at "identifier" data and code storage space.
+<Something>1   # Assigning integer number 1 to "Something".
+<Something>1   # Assigning integer number 1 to "Something" in concise form.
+<Something>"Hello World"  # Assigning string literal "Hello World" to "Something".
 <Something>{identifier}       # Assigning data and code at "identifier" to data and code at "Something";
                               #   other Things must be enclosed in curly brackets, only literals are
                               #   exempt.
 # THINGS ARE ALWAYS ENCLOSED IN BRACKETS! I.E. ALL "THING" TOKENS FOR LEXING ARE
 # DELIMITED AND ALREADY READ/WRITE/EXECUTE ASSIGNED.
 
-<Thing.subThing>"I'm a SubThing!"               # Dot notation is used to refer to parent Thing and child subThing.
-<>[Print] with "Hello World."                   # An action, called "Print", and a single argument, a string literal, the
-                                                #   result of which is assigned to the Null Thing after execution.
-[Print] with "Hello Again!"                     # We elide the Null Thing assignment in front of action calls for readability.
-<myString> is [Print] with "Hello World!"       # An action called "Print" and a string literal, also 
-                                                #   assigned to a Thing "myString" after execution.
-<myString> is [Print] with {"Hello", "World!"}  # The same as above, but we use curly bracket to enclose multiple arguments.
-<Thing>{myString}                               # Assigning the value(s) of myString to Thing, using curly brackets 
-                                                #   to enclose direct assignment arguments.
+<Thing.subThing>"I'm a SubThing!"           # Dot notation is used to refer to parent Thing and child subThing.
+<>[Print]"Hello World."                     # An action, called "Print", and a single argument, a string literal, the
+                                            #   result of which is assigned to the Null Thing after execution.
+[Print]"Hello Again!"                       # We elide the Null Thing assignment in front of action calls for readability.
+<myString>[Print]"Hello World!"             # An action called "Print" and a string literal, also 
+                                            #   assigned to a Thing "myString" after execution.
+<myString>[Print]{"Hello", "World!"}        # The same as above, but we use curly bracket to enclose multiple arguments.
+<Thing>{myString}                           # Assigning the value(s) of myString to Thing, using curly brackets 
+                                            #   to enclose direct assignment arguments.
 
 <Result>[Add]{1, 2}                   # Add 1 and 2 and assign the result in Result
 <Result2>[Multiply]{Result, 3}        # Using a Thing as an argument in an action.
 <SomeMath>[Add]{[Multiply]{4, 5}, 2}  # Assigning the result of 2+(4*5) to SomeMath; Nesting TACs (Things-Action-Context statements) 
 
-<>[]{}
+####################################################################80#chars####
+# # <Title>"Learn TACL in Y Minutes"
+# # <Author>"Corey Naas"
+# # <DateCreated>"2023-11"
+# # <License>"Copyright 2023 Corey Naas. All Rights Reserved."
+# # <TargetLanguage>"TACL"
+
+# Introduction to TACL
+# This document is designed to give you a quick overview of the Thing-Action-Context Language (TACL).
+# You will learn how to create and manipulate Things, use Actions, and understand Contexts.
+
+# Comments
+# Use the hash symbol to create comments. Comments are not executed and serve as notes or documentation.
+
+# Assignment
+# To assign a value to a Thing, use the angle brackets followed by the value.
+<identifier>1  # Assigning integer number 1 to "identifier", a Thing for storing data or code.
+<Something>"Hello World"  # Assigning string literal "Hello World" to "Something."
+
+# Transport Context
+# Use curly brackets to pass Things as arguments to Actions or to other Things.
+<newThing>{identifier}  # Transporting the value of "identifier" to "newThing".
+
+# Action Context
+# Actions are enclosed in square brackets and can be executed with or without a return Thing.
+[Print]{"Hello World!"}  # Calls the "Print" action with a string literal as an argument.
+<myString>[Print]{"Concatenated ", "string!"}  # Executes "Print" with multiple arguments and assigns the result to "myString".
+
+# Combining Actions and Things
+# You can nest Actions within other Actions to perform complex operations.
+<SomeMath>[Add]{[Multiply]{4, 5}, 2}  # Performs 4 multiplied by 5, then adds 2, and assigns the result to "SomeMath".
+
+# SubThings and Dot Notation
+# SubThings are properties or components of a Thing and are accessed using dot notation.
+<MainThing.SubThing>"I'm a SubThing of MainThing!"
+
+# Control Structures
+# TACL provides constructs for conditional execution and loops.
+[If]{(c)[LessThan]{<Temperature>, 20}, (t)[Print]{"It's cold!"}, (f)[Print]{"It's warm!"}}  # Conditional execution based on Temperature.
+
+# Error Handling
+# Use the [Attempt] action to handle exceptions in TACL.
+[Attempt]{(a)[Divide]{10, 0}, (e)[Print]{"Division by zero is not allowed."}}
+
+# Defining New Actions
+# Define custom actions using the [DefineAction] system action.
+<CustomGreet>[DefineAction]{
+    <Input>{<name>}
+    <Default><Error>"An error occurred in CustomGreet."
+    <Body>{
+        [Print]{"Hello, ", <name>, "!"}
+        <Return>0  # Signifies successful execution.
+    }
+}
+
+# Executing Defined Actions
+# Once you have defined an action, you can execute it by calling it with its required inputs.
+<Greeting>[CustomGreet]{"Corey"}
+
+# End of "Learn TACL in Y Minutes"
+
+####################################################################80#chars####
+# <Title>"Learn TACL in Y Minutes"
+# <Author>"Corey Naas"
+# <DateCreated>"2023-11"
+# <License>"Copyright 2023 Corey Naas. All Rights Reserved."
+# <TargetLanguage>"TACL"
+
+# Introduction to TACL
+# TACL is a language designed for clarity and simplicity, focusing on the concepts
+# of Things (data), Actions (functions), and Contexts (execution and assignment details).
+
+# Data Types
+<NumberThing>42  # Integer assignment
+<StringThing>"Hello TACL"  # String assignment
+<BoolThing>True  # Boolean assignment
+
+# Composite Things
+<MyThingType>[DefineThingType]{Property1, Property2}
+<InstanceThing>[CopyThingType]{MyThingType}
+<InstanceThing.Property1>"Property value"
+
+# Contexts
+<ActionContext>[ActionName]{Parameters}  # Action execution with parameters
+<TransportContext>{<Thing1>, <Thing2>}  # Transporting multiple Things
+<AssignmentContext><Thing>"Value"  # Assigning a value to a Thing
+<IndexContext>(Index)  # Accessing an element in a Pile
+
+# Control Structures
+# If-Then-Else
+[If]{(c)[GreaterThan]{<Temperature>, 20}, (t)[Print]{"Warm day"}, (f)[Print]{"Cool day"}}
+
+# Loops
+# While Loop
+[While]{(c)[LessThan]{<Counter>, 10}, (a)<Counter>[Increment]{<Counter>, 1}}
+
+# For Loop
+[For]{(i)<Counter>1, (c)[LessThan]{<Counter>, 10}, (u)<Counter>[Increment]{<Counter>, 1}, (a)[Print]{<Counter>}}
+
+# Error Handling
+[Attempt]{(a)[ActionThatMightFail]{}, (e)[Print]{"An error occurred!"}}
+
+# Actions
+<CustomAction>[DefineAction]{
+    <Input>{Param1, Param2}
+    <Default><Error>"An error occurred."
+    <Body>{
+        <Result>[Add]{Param1, Param2}
+        <Return>{Result}
+    }
+}
+<Output>[CustomAction]{5, 10}
+
+# Boxes and Piles
+# Box
+<ThingBox>{<Thing1>, <Thing2>, <Thing3>}
+# Pile
+<ThingPile>{(1)<Thing1>, (2)<Thing2>, (3)<Thing3>}
+
+# Scoping and subThings
+# Define a composite Thing with subThings using [Here]
+<MyComplexThing>[DefineThingType]{
+    <SubThing1>[Here]
+    <SubThing2>[Here]
+}
+<MyInstance>[CopyThingType]{MyComplexThing}
+<MyInstance.SubThing1>"SubThing value"
+
+# Standard Library Quick Reference
+# Mathematical Operations
+<Sum>[Add]{1, 2}
+<Product>[Multiply]{3, 4}
+
+# Logical Operations
+<IsEqual>[Equals]{5, 5}
+<IsNotEqual>[Unequals]{5, 6}
+
+# I/O Operations
+[Print]{"Output to console"}
+<Input>[Prompt]{"Enter your name: "}
+
+# Best Practices
+# Use clear naming conventions and organize your code with indentation and comments.
+
+# Error Handling Examples
+# Attempt to open a file and handle the error
+[Attempt]{(a)[OpenFile]{"nonexistent.txt"}, (e)[Print]{"File not found."}}
+
+# Advanced Topics
+# (Include any advanced features specific to TACL that users should be aware of)
+
+# Glossary
+# (A list of terms and their definitions used in TACL)
+
+# FAQs
+# (Answers to common questions about TACL)
+
+# Examples
+# (Practical examples of TACL code)
+
+# Appendix
+# (Additional resources and quick reference materials)
+
+# Remember, brackets are essential in TACL for denoting different contexts!
+
+####################################################################80#chars####
