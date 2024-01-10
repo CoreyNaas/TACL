@@ -1,10 +1,10 @@
 ####################################################################80#chars####
-# # <Name>"TACLing Latin"
+# # <Name>"TACLing Emojis"
 # # <Author>"Corey Naas"
 # # <Date>"2024-01-01"
 # # <License>"Copyright 2023 Corey Naas. All Rights Reserved."
 # # <Description>"Misc examples of using emojis in TACL"
-# # <TargetLanguage>
+# # <TargetLanguage>"Gen Z"
 
 # Below is an example of a TACL program that uses emojis to define a simple 
 #   action that checks if a number (represented by a dice emoji) is greater than

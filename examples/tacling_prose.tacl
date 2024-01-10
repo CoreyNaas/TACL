@@ -1,0 +1,51 @@
+####################################################################80#chars####
+# # <Name>"Prose in TACL"
+# # <Author>"Corey Naas"
+# # <Date>"2024-01-02"
+# # <License>"Copyright 2023 Corey Naas. All Rights Reserved."
+# # <Description>""
+# # <TargetLanguage>
+
+# "In the beginning, there was a vision, an aspiration for unity and justice, 
+#    as articulated by the Preamble. From its profound prose, the very essence 
+#    of governance was conjured—a Constitution for the United States of America. 
+#    The Preamble's words echoed the principles of democracy and the rule of law, 
+#    and from this ethereal declaration, the structure of a new government began 
+#    to take form."
+
+<Beginning>[DefineAction]{
+    <Input>{}
+    <Body>{
+        # Vision and aspiration are conceived
+        <Vision>[Here]
+        <Aspiration>[Here]
+        
+        # Articulation of unity and justice through the Preamble
+        <Preamble>[DefineThingType]{
+            Unity
+            Justice
+        }
+        
+        # Essence of governance materializes into a Constitution
+        <EssenceOfGovernance>[Here]
+        <Constitution>[CopyThingType]{UnitedStatesOfAmerica}
+        
+        # Preamble's principles echo democracy and rule of law
+        <Principles>[DefineThingType]{
+            Democracy
+            RuleOfLaw
+        }
+        <PreambleWords>[CopyThingType]{Principles}
+        
+        # Declaration leads to the formation of government structure
+        <EtherealDeclaration>[Here]
+        <GovernmentStructure>[Here]
+        
+        # The narrative comes to life
+        [Print]{"In the beginning, a vision and aspiration for unity and justice were articulated by the Preamble."}
+        [Print]{"From its profound prose, the very essence of governance was conjured—a Constitution for the United States of America."}
+        [Print]{"The Preamble's words echoed the principles of democracy and the rule of law, and from this ethereal declaration, the structure of a new government began to take form."}
+        
+        <Return>0
+    }
+}

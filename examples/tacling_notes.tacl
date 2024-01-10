@@ -1,5 +1,55 @@
+####################################################################80#chars####
+# # <Name>"TACLing Notes and Recordkeeping"
+# # <Author>"Corey Naas"
+# # <Date>"2024-01-01"
+# # <License>"Copyright 2023 Corey Naas. All Rights Reserved."
+# # <Description>"Misc examples of taking notes in TACL; writing notes like code"
 
-### Personal Journaling
+# Examples, as written by GPT-4:
+# - Meeting Minutes
+# - Personal Journaling
+# - Recipe Collection
+# - Vehicle Maintenance Log
+# - Gardening Journal
+# - Event Planning
+# - Tracking Fitness Progress
+# - Learning Notes
+# - Reading Summaries
+# - Travel Itineraries
+# - Research Projects
+# - Goal Tracking
+# - Home Renovation Planning
+# - Personal Budgeting
+# - Event Guest Lists
+# - Language Learning Tracker
+
+# Meeting Minutes
+<Meeting>[DefineThingType]{
+    <Date>[Here]
+    <Participants>[Here]
+    <AgendaItems>[Here]
+    <DecisionsMade>[Here]
+    <ActionItems>[Here]
+}
+
+<TeamMeeting>[CopyThingType]{Meeting}
+<TeamMeeting.Date>"2023-04-16"
+<TeamMeeting.Participants>{"Corey Naas", "Sam Lee", "Jamie Fox"}
+<TeamMeeting.AgendaItems>{
+    "Quarterly sales review", 
+    "Upcoming product launch", 
+    "Budget planning for Q3"
+}
+<TeamMeeting.DecisionsMade>{
+    "Increase marketing budget", 
+    "Hire two new designers"
+}
+<TeamMeeting.ActionItems>{
+    {"Prepare marketing proposal", "Sam Lee"}, 
+    {"Outline recruitment plan", "Jamie Fox"}
+}
+
+# Personal Journaling
 <MyDay>[DefineThingType]{
     <Date>[Here]
     <Mood>[Here]
@@ -40,6 +90,49 @@
 <ChocolateCakeRecipe.PrepTime>"15 minutes"
 <ChocolateCakeRecipe.CookTime>"35 minutes"
 <ChocolateCakeRecipe.Servings>8
+
+# Vehicle Maintenance Log
+<VehicleMaintenance>[DefineThingType]{
+    <Vehicle>[Here]
+    <ServiceDate>[Here]
+    <Mileage>[Here]
+    <ServicePerformed>[Here]
+    <Notes>[Here]
+}
+
+<CarService>[CopyThingType]{VehicleMaintenance}
+<CarService.Vehicle>"2018 Honda Accord"
+<CarService.ServiceDate>"2023-04-15"
+<CarService.Mileage>"45000 miles"
+<CarService.ServicePerformed>{
+    "Oil change", 
+    "Tire rotation", 
+    "Brake inspection"
+}
+<CarService.Notes>"All systems in good condition. Next service due in 6 months or at 50000 miles."
+
+# Gardening Journal
+<GardenPlant>[DefineThingType]{
+    <PlantName>[Here]
+    <PlantingDate>[Here]
+    <Location>[Here]
+    <CareInstructions>[Here]
+    <GrowthObservations>[Here]
+}
+
+<TomatoPlant>[CopyThingType]{GardenPlant}
+<TomatoPlant.PlantName>"Heirloom Tomato"
+<TomatoPlant.PlantingDate>"2023-04-15"
+<TomatoPlant.Location>"Raised bed in backyard"
+<TomatoPlant.CareInstructions>{
+    "Water daily", 
+    "Fertilize weekly with compost", 
+    "Support with stakes as it grows"
+}
+<TomatoPlant.GrowthObservations>{
+    "Sprouted on 2023-04-22", 
+    "First flowers on 2023-05-15"
+}
 
 # Event Planning
 <Event>[DefineThingType]{
@@ -98,32 +191,6 @@
     "Mastering a musical instrument"
 }
 <NeuroscienceBasics.References>{"Neuroscience, Fifth Edition by Purves et al."}
-
-# Meeting Minutes
-<Meeting>[DefineThingType]{
-    <Date>[Here]
-    <Participants>[Here]
-    <AgendaItems>[Here]
-    <DecisionsMade>[Here]
-    <ActionItems>[Here]
-}
-
-<TeamMeeting>[CopyThingType]{Meeting}
-<TeamMeeting.Date>"2023-04-16"
-<TeamMeeting.Participants>{"Corey Naas", "Sam Lee", "Jamie Fox"}
-<TeamMeeting.AgendaItems>{
-    "Quarterly sales review", 
-    "Upcoming product launch", 
-    "Budget planning for Q3"
-}
-<TeamMeeting.DecisionsMade>{
-    "Increase marketing budget", 
-    "Hire two new designers"
-}
-<TeamMeeting.ActionItems>{
-    {"Prepare marketing proposal", "Sam Lee"}, 
-    {"Outline recruitment plan", "Jamie Fox"}
-}
 
 # Reading Summaries
 <BookSummary>[DefineThingType]{
@@ -221,3 +288,103 @@
     "Full song: 2023-06-15", 
     "Open mic: 2023-08-10"
 }
+
+# Home Renovation Planning
+<RoomRenovation>[DefineThingType]{
+    <Room>[Here]
+    <Budget>[Here]
+    <DesignInspiration>[Here]
+    <MaterialsNeeded>[Here]
+    <Contractors>[Here]
+    <Timeline>[Here]
+}
+
+<KitchenRemodel>[CopyThingType]{RoomRenovation}
+<KitchenRemodel.Room>"Kitchen"
+<KitchenRemodel.Budget>"$10,000"
+<KitchenRemodel.DesignInspiration>{"Modern minimalist", "Open shelving", "Large island"}
+<KitchenRemodel.MaterialsNeeded>{"Quartz countertops", "Ceramic tile", "LED light fixtures"}
+<KitchenRemodel.Contractors>{"ABC Renovations", "XYZ Plumbing", "Eco Electric"}
+<KitchenRemodel.Timeline>{
+    "Design phase: April - May", 
+    "Demolition: June 1st week", 
+    "Construction: June 2nd - July end"
+}
+
+# Personal Budgeting
+<MonthlyBudget>[DefineThingType]{
+    <Month>[Here]
+    <IncomeSources>[Here]
+    <Expenses>[Here]
+    <SavingsGoals>[Here]
+    <ActualSavings>[Here]
+}
+
+<AprilBudget>[CopyThingType]{MonthlyBudget}
+<AprilBudget.Month>"April 2023"
+<AprilBudget.IncomeSources>{
+    {"Salary", "$3000"}, 
+    {"Freelancing", "$500"}
+}
+<AprilBudget.Expenses>{
+    {"Rent", "$1200"}, 
+    {"Groceries", "$300"}, 
+    {"Utilities", "$150"}
+}
+<AprilBudget.SavingsGoals>{
+    {"Emergency Fund", "$500"}, 
+    {"Vacation", "$200"}
+}
+<AprilBudget.ActualSavings>"$600"
+
+# Event Guest Lists
+<EventGuests>[DefineThingType]{
+    <EventName>[Here]
+    <Date>[Here]
+    <GuestList>[Here]
+    <RSVPStatus>[Here]
+    <MenuPreferences>[Here]
+}
+
+<WeddingGuests>[CopyThingType]{EventGuests}
+<WeddingGuests.EventName>"Smith-Jones Wedding"
+<WeddingGuests.Date>"2023-08-12"
+<WeddingGuests.GuestList>{
+    "John Doe", "Jane Smith", "Alice Johnson", "Bob Brown"
+}
+<WeddingGuests.RSVPStatus>{
+    {"John Doe", "Accepted"}, 
+    {"Jane Smith", "Declined"}, 
+    {"Alice Johnson", "Pending"}, 
+    {"Bob Brown", "Accepted"}
+}
+<WeddingGuests.MenuPreferences>{
+    {"John Doe", "Vegetarian"}, 
+    {"Bob Brown", "No allergies"}
+}
+
+# Language Learning Tracker
+<LanguageProgress>[DefineThingType]{
+    <Language>[Here]
+    <StudyHours>[Here]
+    <Vocabulary>[Here]
+    <GrammarPoints>[Here]
+    <SpeakingPractice>[Here]
+    <CulturalNotes>[Here]
+}
+
+<SpanishLearning>[CopyThingType]{LanguageProgress}
+<SpanishLearning.Language>"Spanish"
+<SpanishLearning.StudyHours>"10 hours/week"
+<SpanishLearning.Vocabulary>{
+    "Greetings", "Numbers", "Common verbs"
+}
+<SpanishLearning.GrammarPoints>{
+    "Present tense conjugations", 
+    "Gender of nouns"
+}
+<SpanishLearning.SpeakingPractice>{
+    "Conversation with language partner", 
+    "Shadowing exercise from podcast"
+}
+<SpanishLearning.CulturalNotes>"Explored the significance of 'La Tomatina' festival"
