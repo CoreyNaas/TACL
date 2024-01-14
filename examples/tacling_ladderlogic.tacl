@@ -1,0 +1,22 @@
+####################################################################80#chars####
+# # <Name>"Ladder Logic in TACL"
+# # <Author>"Corey Naas"
+# # <Date>"2024-01"
+# # <License>"Copyright 2024 Corey Naas. All Rights Reserved."
+# # <Description>""
+# # <TargetLanguage>
+
+<MyRoutine>[DefineRoutine]{
+    <Rungs>{
+        <1>{
+            [Branch]{
+                (i)<>{
+                    [XIC]{MyInput}
+                }
+                (o)<>{
+                    [OTE]{MyOutput}
+                }
+            }
+        }
+    }
+}

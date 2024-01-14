@@ -1,0 +1,45 @@
+####################################################################80#chars####
+# # <Name>"Logic in TACL"
+# # <Author>"Corey Naas"
+# # <Date>"2024-01"
+# # <License>"Copyright 2024 Corey Naas. All Rights Reserved."
+# # <Description>""
+# # <TargetLanguage>
+
+## Proofs 
+# Establishing the ThingType of a logical proof. Includes a Piles for Premises,
+# a Pile for Conclusions, and isValid and isSound to document whether the argument
+# is valid and whether it is sound.
+# Define the structure of a deductive statement
+<Proof>[DefineThingType]{
+    <Premises>{
+        (1)"..."
+        (2)"..."
+        (3)"..."
+        (4)"..."
+    }
+    <Conclusions>{
+        (1)"..."
+        (2)"..."
+    }
+    <isValid>"False" # Default and placeholder for result of [TestDeduction]
+    <isSound>"False" # Default and placeholder for result of [TestDeduction]
+}
+
+# Copy the deductive statement thing type and fill in
+# IsValid and isSound are omitted because they have default values as declared above
+<MyDeductiveProof>[CopyThingType]{Proof}
+<MyDeductiveProof>{
+    <Premises>{
+        (1)"Elizabeth *does* drive either (1) a Honda or (2) a Nissan."
+        (2)"Elizabeth *does not* drive (2) a Honda"
+    }
+    <Conclusions>{
+        (1)"Elizabeth *does* drive (2) a Nissan"
+    }
+}
+[Print]{MyDeductiveProof.isValid} # Prints "False", as the default hasn't been changed
+[Print]{MyDeductiveProof.isSound} # Prints "False", ditto
+<MyDeductiveProof>[TestDeduction]{MyDeductiveProof}
+[Print]{MyDeductiveProof.isValid} # Prints "True", as [TestDeduction] verified validity
+[Print]{MyDeductiveProof.isSound} # Prints "True", as [TestDeduction] verified soundness

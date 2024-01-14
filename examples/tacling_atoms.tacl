@@ -5,14 +5,19 @@
 # # <License>"Copyright 2023 Corey Naas. All Rights Reserved."
 # # <Description>"Describing atoms, in TACL."
 # # <TargetLanguage>"Reality"
-<Atom>[DefineThing]{
-	<Nucleus>[DefineThing]{
-		<ProtonCount>
-		<NeutronCount>
-	}
-	<ElectronCloud>[DefineThing]{
-		<ElectronCount>
-		<ElectronShells>
-	}
-	<ValenceElectronCount>
+
+<Atom>[DefineThingType]{
+    <Name>
+    <AtomNumber>
+    <MassNumber>
+    <Protons>
+    <Neutrons>
+    <Electrons>
+    <Nucleus>
+    <EnergyLevels>
+    <ValenceElectrons>
+    <IonizationEnergy>
+    <Electronegativity>
+    <AtomicRadius>
+    <Reactivity>
 }

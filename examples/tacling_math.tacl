@@ -1,0 +1,26 @@
+####################################################################80#chars####
+# # <Name>"Math in TACL"
+# # <Author>"Corey Naas"
+# # <Date>"2024-01"
+# # <License>"Copyright 2024 Corey Naas. All Rights Reserved."
+# # <Description>""
+# # <TargetLanguage>
+
+## TACLing a basic mathematical function. the TACL syntax may seem more complex, 
+# but I find it is entirely and completely unambiguous in form. One must only
+# remember that all TACL is prefix notation, that is, the operation comes before 
+# the arguments, and it is executed from the inside out. with prefix notation,
+# the order of operations is up to the author to declare, not for the reader to 
+# have to decipher and speculate if there are any ambiguities (i.e. a regular 
+# function always being used in the for "f(x)", but the trig functions are 
+# shorthanded as "Sinx", "Sin^2x", "Sin^2 x", I.e., deviating from the accepted
+# function format).
+#
+# LaTeX: $ f(x) = 2x+1 $
+# Infix: f(x) = 2x+1
+<f>[DefineFunction]{
+    <Inputs>{x}
+    <Body>{
+        <Return>{[Add]{[Mult]{x, 2}, 1}}
+    }
+}
