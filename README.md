@@ -51,7 +51,7 @@ The brackets purposefully surround the whole "Thing" name, and every expression 
 
 ## Example: Hello World
 
-In this program, we define a `Main` action that takes one input. This action simply prints "Hello World! ..." to the output and returns 0. (If it returns "An Error has occurred.", the reader is encouraged to contact a physician.)
+In this program, we define a `Main` action that takes no inputs. This action simply prints "Hello World! ..." to the output and returns 0. (If it returns "An Error has occurred.", the reader is encouraged to contact a physician.)
 
 ![helloworldexample](helloworld.png)
 
