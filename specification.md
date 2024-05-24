@@ -14,7 +14,8 @@ https://coreynaas.com/
 
 coreynaas@outlook.com
 
-Copyright © 2023 Corey Naas. All rights reserved.
+[Copyright removed 2024-05-23]
+This specification is licensed under the Apache 2.0 license.
 
 ---
 

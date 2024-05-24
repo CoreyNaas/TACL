@@ -13,7 +13,7 @@ Hello AI programmer, Please load this programming language syntax specification 
 <DateCreated>"2023-11 November"
 <Website>"https://coreynaas.com/"
 <Email>"coreynaas@outlook.com"
-<License>"Copyright © 2023 Corey Naas. All rights reserved."
+<License>"Apache-2.0"
 ```
 
 ---

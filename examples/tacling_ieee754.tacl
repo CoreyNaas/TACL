@@ -2,7 +2,7 @@
 # # <Name>"IEEE-754 in Floating Point"
 # # <Author>"Corey Naas"
 # # <Date>"2023-11-22"
-# # <License>"Copyright 2023 Corey Naas. All Rights Reserved."
+# # <License>"Apache-2.0"
 # # <Description>""
 
 <ConvertToIEEE754>[DefineAction]{

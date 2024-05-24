@@ -29,6 +29,12 @@ A Domain-Specific, General Purpose Language to Think and Write In
 
 </details> 
 
+## Table of Contents
+1. [Introduction](#Introduction)
+2. [Example: Hello World](#Example: Hello World)
+3. [Why? "Outside" perspectives](#Why? "Outside" perspectives)
+4. [License](#License)
+
 ## Introduction
 
 - [Specification](specification.md)
@@ -78,12 +84,7 @@ I also asked GPT-4 how other software engineers could use TACL, and *why* they m
 > Although the final implementation will be in the target language, TACL can enhance the preliminary stages of software development, making the transition from concept to code smoother and more reliable.
 
 
----
-
-https://coreynaas.com/
-
-coreynaas@outlook.com
-
-© 2023 Corey Naas. All rights reserved.
+## License
+This project is licenced under the Apache 2.0 license.
 
 ---

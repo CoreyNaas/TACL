@@ -23,7 +23,7 @@ Please read the following TACL and write a suitable VFD control Action to integr
 # # <Name>"Corey's Conveyor Controller (CCC)"
 # # <Author>"Corey Naas"
 # # <Date>"2023-11-26"
-# # <License>"Copyright 2023 Corey Naas. All Rights Reserved."
+# # <License>"Apache-2.0"
 # # <Description>"An exercise to refresh/revisit my conveyor programming 
 # #                 experience by writing a program for one from scratch in my 
 # #                 personal pseudocode."

@@ -2,7 +2,7 @@
 # # <Name>"C Pointers in TACL"
 # # <Author>"Corey Naas"
 # # <Date>"2023-11-22"
-# # <License>"Copyright 2023 Corey Naas. All Rights Reserved."
+# # <License>"Apache-2.0"
 # # <Description>"I had ChatGPT generate a basic "pointer example" program in C. This is my attempt to transcode that into TACL form."
 # # <TargetLanguage>"C"
 [Include]{stdio.h}
