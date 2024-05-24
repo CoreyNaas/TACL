@@ -18,10 +18,10 @@ TACL is designed to standardize the way we write pseudocode across multiple doma
 - [Asking the AI](#asking-the-AI)
 
 ## Specification Document
-The specification document outlines the syntax and structure of TACL. [View the specification document](specification.md) to understand the foundational concepts that shape our pseudocode.
+The specification document outlines the syntax and structure of TACL. [View the specification document](/TACL_Specification.md) to understand the foundational concepts that shape our pseudocode.
 
 ## Priming an LLM
-To utilize TACL with an LLM, refer to the `LLM_PRIMING.md` file which includes examples and guidance on how to rewrite user prompts to adhere to our specification.
+To utilize TACL with an LLM, refer to the [trainingprompt.md](trainingprompt.md) file which includes a prompt one can provide for an LLM to rewrite user prompts to adhere to our specification.
 
 ## Syntax Highlighting
 We support syntax highlighting for both VSCode and Notepad++. To install, follow these steps:
