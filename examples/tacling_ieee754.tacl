@@ -1,0 +1,45 @@
+####################################################################80#chars####
+# # <Name>"IEEE-754 in Floating Point"
+# # <Author>"Corey Naas"
+# # <Date>"2023-11-22"
+# # <License>"Copyright 2023 Corey Naas. All Rights Reserved."
+# # <Description>""
+
+<ConvertToIEEE754>[DefineAction]{
+	<Input>{InputFloatValue}
+	<Default>0
+	<Body>{
+		# Step 1: Determine the sign bit.
+		[If]{
+			(c)<>[IsNegative]{InputFloatValue}
+			(t)<>{
+				<SignBit>1 
+				<InputFloatValue>[ReverseSign]{InputFloatValue}
+			}
+			(f)<SignBit>0
+		}
+		
+		# Step 2: Normalize the float value to binary.
+		<BinaryValue>[ConvertToBinary]{InputFloatValue}
+		
+		# Step 3: Find the position of the binary point, and ensure the number is in 
+		#   the form of 1.xxxxx, or in the range of [1 2)
+		<NormalizedValue>[NormalizeBinary]{BinaryValue}
+		<Exponent>[CountShiftsRequiredToNormalizeBinary]{BinaryValue}
+		
+		# Step 4: Adjust the exponent to be biased by adding the bias (127 for single-precision).
+		<BiasedExponent>[Add]{Exponent, 127}
+		
+		# Step 5: Extract the mantissa, which is the part after the binary point (drop the leading 1).
+		<Mantissa>[ExtractMantissa]{NormalizedValue}
+		
+		# Step 6: Convert the biased exponent and the mantissa to binary.
+		<ExponentBits>[ConvertToBinaryWithLength]{BiasedExponent, 8}
+		<MantissaBits>[ConvertToBinaryWithLength]{Mantissa, 23}
+		
+		# Step 7: Assemble the IEEE 754 representation.
+		<Output>[ConcatenateBinary]{SignBit, ExponentsBits, MantissaBits}
+		
+		<Return>{Output}
+	}
+}

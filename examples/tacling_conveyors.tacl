@@ -1,7 +1,8 @@
 ####################################################################80#chars####
 # # <Name>"Corey's Conveyor Controller (CCC)"
 # # <Author>"Corey Naas"
-# # <Date>"2023-11-26"
+# # <DateCreated>"2023-11-26"
+# # <DateUpdated>"2024-05-11"
 # # <License>"Copyright 2023 Corey Naas. All Rights Reserved."
 # # <Description>"An exercise to refresh/revisit my conveyor programming 
 # #                 experience by writing a program for one from scratch in my 
@@ -47,6 +48,10 @@
 		(11)<FailedToRun>
 		(12)<FailedToStop>
 		(13)<Overloaded>
+		("Test") {
+			<>[]{}
+			<>[]{}
+		}
 	}
 	<Manual>[DefineThingType]{
 		(1)<Enable>
@@ -72,7 +77,7 @@
 						(t)<Conveyor.PhotoeyeOutput>1
 						(f)<Conveyor.PhotoeyeOutput>{Conveyor.PhotoeyeOutput}
 					}
-					<PhotoeyeBlockedTimer>0, # reset opposite timer
+					<PhotoeyeBlockedTimer>0 # reset opposite timer
 				}
 				(f)<PhotoeyeBlocked>{
 					<PhotoeyeBlockedTimer>[RunTimer]{PhotoeyeBlockedTimer}
@@ -289,24 +294,16 @@
 		}
 	}
 	[DebouncePhotoeye]{Conveyor.PhotoeyeRaw, Conveyor.Config.DebounceTime}
-	[DetectJam]{Conveyor.PhotoeyeOutput, Conveyor.Config.JamTime, 
-							Conveyor.Reset}
-	[DetectOverload]{Conveyor.Overload, Conveyor.Config.OverloadTime, 
-							Conveyor.Reset}
-	[DetectFailureToRun]{Conveyor.RunCommand, Conveyor.RunFeedback, 
-							Conveyor.RunFailureTime}
+	[DetectJam]{Conveyor.PhotoeyeOutput, Conveyor.Config.JamTime, Conveyor.Reset}
+	[DetectOverload]{Conveyor.Overload, Conveyor.Config.OverloadTime, Conveyor.Reset}
+	[DetectFailureToRun]{Conveyor.RunCommand, Conveyor.RunFeedback, Conveyor.RunFailureTime}
 	[DetectCascade]{Conveyor.PhotoeyeOutput, Conveyor.DownstreamConveyorRunning}
-	[PollIdleTimer]{Conveyor.Running, Conveyor.UpstreamPhotoeye, 
-							Conveyor.Config.TimeoutTime, Conveyor.Reset}
-	[PollGapInducement]{Conveyor.PhotoeyeOutput, Conveyor.Running, 
-							Conveyor.Config.GapDistance}
-	[PollHardInterlocks]{Conveyor.EStopActive, Conveyor.Overloaded, 
-							Conveyor.OutOfService}
-	[PollSoftInterlocks]{Conveyor.Jammed, Conveyor.Cascaded, Conveyor.TimedOut, 
-							Conveyor.Manual}
+	[PollIdleTimer]{Conveyor.Running, Conveyor.UpstreamPhotoeye, Conveyor.Config.TimeoutTime, Conveyor.Reset}
+	[PollGapInducement]{Conveyor.PhotoeyeOutput, Conveyor.Running, Conveyor.Config.GapDistance}
+	[PollHardInterlocks]{Conveyor.EStopActive, Conveyor.Overloaded, Conveyor.OutOfService}
+	[PollSoftInterlocks]{Conveyor.Jammed, Conveyor.Cascaded, Conveyor.TimedOut, Conveyor.Manual}
 	[DelayStartup]{Conveyor.Config.DelayTime}
-	[Run]{Conveyor.HardInterlocksOkay, Conveyor.SoftInterlocksOkay, 
-							Conveyor.RunRequest}
+	[Run]{Conveyor.HardInterlocksOkay, Conveyor.SoftInterlocksOkay, Conveyor.RunRequest}
 }
 
 # Define the Main routine

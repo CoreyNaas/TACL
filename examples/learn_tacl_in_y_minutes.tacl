@@ -6,7 +6,7 @@
 # # <TargetLanguage>"TACL"
 
 # A comment.
-<>  # Null assignment.
+<>  # Empty assignment.
 <identifier>1  # Assigning integer number 1 at "identifier" data and code storage space.
 <identifier>   # Assigning null at "identifier" data and code storage space.
 <Something>1   # Assigning integer number 1 to "Something".
@@ -20,13 +20,13 @@
 
 <Thing.subThing>"I'm a SubThing!"           # Dot notation is used to refer to parent Thing and child subThing.
 <>[Print]"Hello World."                     # An action, called "Print", and a single argument, a string literal, the
-                                            #   result of which is assigned to the Null Thing after execution.
-[Print]"Hello Again!"                       # We elide the Null Thing assignment in front of action calls for readability.
+                                            #   result of which is assigned to the Empty Thing after execution.
+[Print]"Hello Again!"                       # We can elide the Empty Thing assignment in front of action calls for readability.
 <myString>[Print]"Hello World!"             # An action called "Print" and a string literal, also 
                                             #   assigned to a Thing "myString" after execution.
-<myString>[Print]{"Hello", "World!"}        # The same as above, but we use curly bracket to enclose multiple arguments.
-<Thing>{myString}                           # Assigning the value(s) of myString to Thing, using curly brackets 
-                                            #   to enclose direct assignment arguments.
+<myString>[Print]{"Hello ", "World!"}        # The same as above, but we use curly bracket to enclose multiple arguments.
+<Thing>{myString}                           # Assigning the value of myString to Thing, using curly brackets 
+                                            #   to enclose assignment arguments.
 
 <Result>[Add]{1, 2}                   # Add 1 and 2 and assign the result in Result
 <Result2>[Multiply]{Result, 3}        # Using a Thing as an argument in an action.
