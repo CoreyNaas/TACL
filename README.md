@@ -37,7 +37,7 @@ A Domain-Specific, General Purpose Language to Think and Write In
 
 ## Introduction
 
-- [Specification](specification.md)
+- [Specification](/TACL_Specification.md)
 - [Example: TACLing Conveyors](/examples/tacling_conveyors.tacl)
 - [Example: TACLing Latin](/examples/tacling_latin.tacl)
 - [Example: TACling Chess](/examples/tacling_chess.tacl)
